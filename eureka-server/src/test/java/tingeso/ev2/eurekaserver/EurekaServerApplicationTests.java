@@ -1,10 +1,10 @@
-package tingeso.ev2.configserver.ms;
+package tingeso.ev2.eurekaserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class EurekaServerApplicationTests {
 
 	@Test
 	void contextLoads() {

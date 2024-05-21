@@ -1,10 +1,10 @@
-package tingeso.ev2.repairs_list.ms;
+package tingeso.ev2.gatewayserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class GatewayServerApplicationTests {
 
 	@Test
 	void contextLoads() {

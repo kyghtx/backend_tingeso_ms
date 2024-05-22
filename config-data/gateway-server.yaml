@@ -1,5 +1,6 @@
 server:
   port: 8080
+spring.cloud.discovery.enabled: true
 eureka:
   instance:
     hostname: localhost
@@ -24,4 +25,4 @@ spring:
         - id: vehicles.ms
           uri: lb://vehicles.ms:8090
           predicates:
-            - Path=/api/vehicles/**
+             - Path=/api/vehicles/**

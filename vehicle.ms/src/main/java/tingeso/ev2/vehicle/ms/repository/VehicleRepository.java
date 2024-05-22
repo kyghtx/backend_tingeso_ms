@@ -21,5 +21,10 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity,Long> {
 
     //Select all vehicles from a type.
     @Query("SELECT v FROM VehicleEntity v WHERE v.vehicle_type_id =:type_vehicle")
-    VehicleEntity getAllVehiclesFromAType(@Param("type_vehicle") int type_vehicle);
+    List<VehicleEntity> getAllVehiclesFromAType(@Param("type_vehicle") Long type_vehicle);
+
+    //Select all vehicles with a motor type
+    @Query("SELECT v FROM VehicleEntity v WHERE v.motor_type_id =:motor_type")
+    List<VehicleEntity> getAllVehiclesFromAMotorType(@Param("motor_type") Long motor_type);
+
 }

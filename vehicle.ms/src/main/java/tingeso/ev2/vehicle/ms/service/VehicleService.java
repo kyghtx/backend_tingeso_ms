@@ -12,6 +12,7 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
+
     /*select all vehicles*/
     public List<VehicleEntity> get_all_vehicles(){
         return vehicleRepository.findAllVehicles();
@@ -21,7 +22,6 @@ public class VehicleService {
         return vehicleRepository.findByPatent(patent);
     }
     //CREATE
-    //TODO: VER EL MANEJO DE EXCEPCIONES
     public VehicleEntity create(VehicleEntity vehicle){
         //IF doesnt exists
         VehicleEntity aux = vehicleRepository.findByPatent(vehicle.getPatent());
@@ -31,5 +31,12 @@ public class VehicleService {
         }
         return null;
     }
+
+    //Get all vehicles from a type.
+
+    public List<VehicleEntity> get_all_vehicles_by_type(Long type){
+        return vehicleRepository.getAllVehiclesFromAType(type);
+    }
+
 
 }

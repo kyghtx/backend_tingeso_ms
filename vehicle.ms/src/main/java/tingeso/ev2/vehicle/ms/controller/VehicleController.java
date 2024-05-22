@@ -18,8 +18,20 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.get_all_vehicles());
     }
 
+    @GetMapping("/vehicles/typeº{type}")
+    ResponseEntity<?> getVehiclesByType(@PathVariable("type") Long type) {
+        return ResponseEntity.ok(vehicleService.get_all_vehicles_by_type(type));
+    }
+
+    @GetMapping("/vehicles/{patent}")
+    ResponseEntity<?> getVehicleByPatent(@PathVariable("patent") String patent){
+        return ResponseEntity.ok(vehicleService.find_by_patent(patent));
+    }
+
     @PostMapping("/vehicles")
     ResponseEntity<?> saveVehicle(VehicleEntity newVehicle){
         return ResponseEntity.ok(vehicleService.create(newVehicle));
     }
+
+
 }

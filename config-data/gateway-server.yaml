@@ -20,8 +20,8 @@ spring:
             allowedOrigins: '*'
             allowedMethods: "*"
             allowedHeaders: "*"
-        routes:
-          - id: vehicles.ms
-            uri: lb://vehicles.ms:8090
-            predicates:
-             - Path=/api/vehicles/**
+      routes:
+        - id: vehicles.ms
+          uri: lb://vehicles.ms:8090
+          predicates:
+            - Path=/api/vehicles/**

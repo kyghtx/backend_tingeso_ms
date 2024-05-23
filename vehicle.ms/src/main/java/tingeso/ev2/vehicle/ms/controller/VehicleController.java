@@ -8,7 +8,6 @@ import tingeso.ev2.vehicle.ms.service.VehicleService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
 public class VehicleController {
     @Autowired
     VehicleService vehicleService;

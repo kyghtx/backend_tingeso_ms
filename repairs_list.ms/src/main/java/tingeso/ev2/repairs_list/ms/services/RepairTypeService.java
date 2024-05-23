@@ -21,4 +21,12 @@ public class RepairTypeService {
     RepairTypeEntity get_repair_type_by_id(Long id){
         return repairTypeRepository.findById(id).orElse(null);
     }
+
+    //Create
+    RepairTypeEntity create(RepairTypeEntity newRepairType){
+        return repairTypeRepository.save(newRepairType);
+    }
+
+    //update (al parecer se usa save tambien)
 }
+

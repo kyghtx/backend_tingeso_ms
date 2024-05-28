@@ -16,7 +16,9 @@ public interface Vehicle_MotorTypeRepository extends JpaRepository<Vehicle_Motor
     //Select Motor type by id
     @Query("SELECT vmt FROM Vehicle_MotorTypeEntity vmt WHERE vmt.motor_type_id =:id")
     Vehicle_MotorTypeEntity findMotorTypeById(@Param("id") Long id);
-
+    //Select motor type by name
+    @Query("SELECT vmt FROM Vehicle_MotorTypeEntity vmt WHERE vmt.motor_type_name =:name")
+    Vehicle_MotorTypeEntity findMotorTypeByName(@Param("name") String name);
 
 
 }

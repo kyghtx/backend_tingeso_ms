@@ -27,9 +27,16 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.find_by_patent(patent));
     }
 
+    //CREATE
     @PostMapping("/vehicles")
-    ResponseEntity<?> saveVehicle(VehicleEntity newVehicle){
+    ResponseEntity<?> saveVehicle(@RequestBody VehicleEntity newVehicle){
         return ResponseEntity.ok(vehicleService.create(newVehicle));
+    }
+    //DELETE ALL
+    @DeleteMapping("/vehicles")
+    void deleteAllVehicles(){
+        vehicleService.DeleteAllVehicles();
+
     }
 
 

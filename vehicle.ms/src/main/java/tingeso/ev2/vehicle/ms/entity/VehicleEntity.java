@@ -25,6 +25,15 @@ public class VehicleEntity {
     private Long motor_type_id;
     //fk vehicle type
     private Long vehicle_type_id;
+    private int year_of_manufacturing;
+    @Column(name= "Year")
+    public int getYear_of_manufacturing() {
+        return year_of_manufacturing;
+    }
+
+    public void setYear_of_manufacturing(int year_of_manufacturing) {
+        this.year_of_manufacturing = year_of_manufacturing;
+    }
 
     public Long getVehicle_id() {
         return vehicle_id;

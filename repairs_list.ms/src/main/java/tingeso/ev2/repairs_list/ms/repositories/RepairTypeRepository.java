@@ -18,6 +18,6 @@ public interface RepairTypeRepository extends JpaRepository<RepairTypeEntity,Lon
     @Query("SELECT rt FROM RepairTypeEntity rt WHERE rt.repair_type_id =:id")
     RepairTypeEntity findRepairTypeById(@Param("id") Long id);
 
-    //Delete a typoe of repair
+    //Delete a types of repair
 
 }

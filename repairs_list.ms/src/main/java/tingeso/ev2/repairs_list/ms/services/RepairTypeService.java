@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class RepairTypeService {
     @Autowired
+
     RepairTypeRepository repairTypeRepository;
 
     //Find all repairs types.
@@ -24,6 +25,7 @@ public class RepairTypeService {
 
     //Create
     RepairTypeEntity create(RepairTypeEntity newRepairType){
+        //SI es que el tipo de reparacion no existe
         return repairTypeRepository.save(newRepairType);
     }
 

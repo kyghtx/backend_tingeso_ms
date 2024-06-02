@@ -2,6 +2,7 @@ package tingeso.ev2.vehicle.ms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tingeso.ev2.vehicle.ms.DTO.VehicleDTO;
 import tingeso.ev2.vehicle.ms.entity.VehicleEntity;
 import tingeso.ev2.vehicle.ms.entity.Vehicle_BrandEntity;
 import tingeso.ev2.vehicle.ms.entity.Vehicle_MotorTypeEntity;
@@ -66,5 +67,9 @@ public class VehicleService {
         vehicleRepository.deleteAll();
     }
 
+    //Obtain custom data from vehicles
+    public List<VehicleDTO> getCustomVehicles(){
+        return vehicleRepository.findCustomVehicleData();
+    }
 
 }

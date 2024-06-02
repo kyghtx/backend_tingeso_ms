@@ -12,10 +12,10 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
-    @GetMapping("/vehicles")
-    ResponseEntity<?> getAllVehicles() {
-        return ResponseEntity.ok(vehicleService.get_all_vehicles());
-    }
+   // @GetMapping("/vehicles")
+    //ResponseEntity<?> getAllVehicles() {
+     //   return ResponseEntity.ok(vehicleService.get_all_vehicles());
+    //}
 
     @GetMapping("/vehicles/typeº{type}")
     ResponseEntity<?> getVehiclesByType(@PathVariable("type") Long type) {
@@ -37,6 +37,11 @@ public class VehicleController {
     void deleteAllVehicles(){
         vehicleService.DeleteAllVehicles();
 
+    }
+    //Get Custom Data from vehicle
+    @GetMapping("/vehicles")
+    ResponseEntity<?> getAllCustomVehicles(){
+        return ResponseEntity.ok(vehicleService.getCustomVehicles());
     }
 
 

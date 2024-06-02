@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/vehicle.ms/src/main/java/tingeso/ev2/vehicle/ms/repository/VehicleRepository.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/vehicle.ms/src/main/java/tingeso/ev2/vehicle/ms/repository/Vehicle_BrandRepository.java" dialect="GenericSQL" />
   </component>
 </project>

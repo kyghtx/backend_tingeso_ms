@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="reports_uh.ms" />
+        <module name="config-server" />
         <module name="repairs_list.ms" />
         <module name="config-server.ms" />
         <module name="gateway-server" />
@@ -23,6 +24,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-server" options="-parameters" />
       <module name="config-server.ms" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="eureka-service" options="-parameters" />

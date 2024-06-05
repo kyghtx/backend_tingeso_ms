@@ -34,4 +34,4 @@ function getMotorTypes(){
 function createMotorType(motorType){
     return axios.post(VEHICLE_MOTORS_API_URL,motorType);
 }
-export default {getVehicles,createBrand,getBrands,getVehicleTypes,createVehicleType,getMotorTypes,createMotorType}
+export default {getVehicles,createBrand,getBrands,getVehicleTypes,createVehicleType,getMotorTypes,createMotorType,createVehicle}

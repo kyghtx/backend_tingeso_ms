@@ -22,23 +22,19 @@ export default function VehicleList() {
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     { field: 'patent', headerName: 'Patente', width: 150 },
-    { field: ""}
+    { field: "model", headerName: "Modelo", width: 150}
   ];
 
-  const rows = types.map((vehicle, index) => ({
+
+  const rows = vehicles.map((vehicle, index) => ({
     id: index + 1,
-    Vehicle_patent: vehicle.patent,
-    Vehicle_brand:vehicle.brand_name,
-    Vehicle_type: vehicle.type_vehicle_name,
-
-
-
-
+    patent: vehicle.patent,
+    model: vehicle.model
   }));
 
   return (
     <Box sx={{ height: '90%', width: '50%' }} className="BrandList">
-      <h1 className="HeadersList">Tipos de vehiculos registrados</h1>
+      <h1 className="HeadersList">vehiculos registrados</h1>
       <DataGrid
         rows={rows}
         columns={columns}

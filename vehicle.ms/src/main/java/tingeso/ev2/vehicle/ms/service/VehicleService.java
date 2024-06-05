@@ -18,8 +18,11 @@ import java.util.List;
 public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
+    @Autowired
     VehicleTypeRepository vehicleTypeRepository;
+    @Autowired
     Vehicle_MotorTypeRepository vehicle_motorTypeRepository;
+    @Autowired
     Vehicle_BrandRepository vehicleBrandRepository;
     //for validations
 
@@ -49,7 +52,7 @@ public class VehicleService {
 
 
 
-        if (exist_patent == null || exist_brand == null || exist_motor_type == null || exist_type == null){
+        if (exist_patent == null && exist_brand != null && exist_motor_type != null && exist_type != null){
         vehicleRepository.save(vehicle);
         return vehicle;
         }

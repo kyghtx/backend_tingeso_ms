@@ -21,7 +21,7 @@ function NavBar() {
             </Link>
           </Button>
           <Button className="nav-item">
-            <Link className="nav-link" to="/api/vehicles/MotorTypes">
+            <Link className="nav-link" to="/api/vehicles">
               Vehiculos
             </Link>
           </Button>

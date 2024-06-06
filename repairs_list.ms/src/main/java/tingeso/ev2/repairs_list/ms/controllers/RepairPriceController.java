@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tingeso.ev2.repairs_list.ms.services.RepairPriceService;
 
 @RestController
-@RequestMapping("api/repair_prices")
+@RequestMapping("api/repairs_prices")
 public class RepairPriceController {
     @Autowired
     RepairPriceService repairPriceService;

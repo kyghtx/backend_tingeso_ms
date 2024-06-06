@@ -13,12 +13,9 @@ public class RepairTypeController {
     @Autowired
     RepairTypeService repairTypeService;
 
+    //ENDPOINTS
     @GetMapping("")
     public ResponseEntity<?> getRepairTypes() {
         return ResponseEntity.ok(repairTypeService.get_repair_list());
     }
-
-
-
-    //ENDPOINTS
 }

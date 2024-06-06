@@ -1,6 +1,5 @@
 package tingeso.ev2.repairs_list.ms.services;
 
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tingeso.ev2.repairs_list.ms.entities.RepairTypeEntity;
@@ -11,7 +10,6 @@ import java.util.List;
 @Service
 public class RepairTypeService {
     @Autowired
-
     RepairTypeRepository repairTypeRepository;
 
     //Find all repairs types.

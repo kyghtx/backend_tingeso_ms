@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: ${SERVER_PORT}
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/vehicles_MS
@@ -7,7 +7,7 @@ spring:
     password: 123456
 eureka:
   instance:
-    hostname: localhost
+    preferIpAddress: true
   client:
     fetch-registry: true
     register-with-eureka: true

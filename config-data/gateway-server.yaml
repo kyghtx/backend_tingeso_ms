@@ -25,8 +25,8 @@ spring:
           uri: lb://vehicles.ms:8090
           predicates:
             - Path=/api/vehicles/**
-        - id: repairs_list.ms
-          uri: lb://repairs_list.ms:8091
+        - id: repairs-list.ms
+          uri: lb://repairs-list.ms:8091
           predicates:
             - Path=/api/repairs_prices/**
             - Path=/api/repairs_types/**

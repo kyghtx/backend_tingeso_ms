@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicles.ms
+  labels:
+    app: vehicles.ms-deployment
+spec:
+  selector:
+    matchLabels:
+      app: vehicles.ms-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicles.ms-pod
+    spec:
+      containers:
+        - name: vehicles.ms
+          image: kyghtx/vehicle.ms
+          ports:
+            - containerPort: 8090
+          env:
+            - name: SERVER_PORT
+              value: "8090"
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_HOST_VEHICLES
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_PORT_VEHICLES
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_DBNAME_VEHICLES
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: DB_PASSWORD
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicles.ms-service
+  labels:
+    app: vehicles.ms-service
+spec:
+  selector:
+      app: vehicles.ms-service
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+  type: LoadBalancer
+

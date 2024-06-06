@@ -17,6 +17,7 @@ public class VehicleController {
        return ResponseEntity.ok(vehicleService.get_all_vehicles());
     }
 
+
     @GetMapping("/vehicles/typeº{type}")
     ResponseEntity<?> getVehiclesByType(@PathVariable("type") Long type) {
         return ResponseEntity.ok(vehicleService.get_all_vehicles_by_type(type));

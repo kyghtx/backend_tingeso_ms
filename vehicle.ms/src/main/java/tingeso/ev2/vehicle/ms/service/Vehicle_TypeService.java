@@ -20,6 +20,8 @@ public class Vehicle_TypeService {
         return vehicleTypeRepository.findVehicleTypeById(id);
     }
 
+
+
     //CREATE
     //Only create if doesnt exist
 

@@ -23,5 +23,4 @@ public interface VehicleTypeRepository extends JpaRepository<Vehicle_TypeEntity,
     Vehicle_TypeEntity findVehicleTypeByName(@Param("name") String name);
 
 
-
 }

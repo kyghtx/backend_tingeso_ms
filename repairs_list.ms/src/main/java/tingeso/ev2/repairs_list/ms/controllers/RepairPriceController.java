@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 import tingeso.ev2.repairs_list.ms.services.RepairPriceService;
 
 @RestController
-@RequestMapping("api/repairs_prices")
+@RequestMapping("/api")
 public class RepairPriceController {
     @Autowired
     RepairPriceService repairPriceService;
-    @GetMapping("")
+    @GetMapping("/repairs_prices")
     ResponseEntity<?> getRepairPrices() {
         return ResponseEntity.ok(repairPriceService.getRepairPrices());
     }
 
-    @GetMapping("/{vehicle_id}/{repair_type_id}")
+    @GetMapping("/repairs_prices/{vehicle_id}/{repair_type_id}")
     ResponseEntity<?> getRepairPrice(@PathVariable("vehicle_id") Long vehicleId,@PathVariable("repair_type_id") Long repairTypeId) {
         return ResponseEntity.ok(repairPriceService.getRepairPrice(vehicleId,repairTypeId));
     }
 
-    @GetMapping("/repair_prices/vehicle_types")
+    @GetMapping("/repairs_prices/vehicle_types")
     ResponseEntity<?> feignVehicleTypes() {
         return ResponseEntity.ok(repairPriceService.getVehicleTypes());
     }

@@ -1,6 +1,7 @@
 package tingeso.ev2.repairs_list.ms.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tingeso.ev2.repairs_list.ms.DTO.Vehicle_TypeDTO;
 import tingeso.ev2.repairs_list.ms.clients.Vehicle_TypeClient;
@@ -16,8 +17,8 @@ public class RepairPriceService {
     @Autowired
     RepairPriceRepository repairPriceRepository;
 
-    public List<Vehicle_TypeDTO> getVehicleTypes() {
-        return vehicleTypeClient.get_Vehicle_Types();
+    public ResponseEntity<?> getVehicleTypes() {
+        return vehicleTypeClient.getAllVehicleTypes();
     }
 
     //Get all repair prices for vehicle types

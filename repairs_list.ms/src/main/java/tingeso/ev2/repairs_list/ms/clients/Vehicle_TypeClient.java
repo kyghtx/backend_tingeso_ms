@@ -3,7 +3,6 @@ package tingeso.ev2.repairs_list.ms.clients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import tingeso.ev2.repairs_list.ms.DTO.Vehicle_TypeDTO;
 import tingeso.ev2.repairs_list.ms.DTO.Vehicle_TypeEntity;
 
 import java.util.List;

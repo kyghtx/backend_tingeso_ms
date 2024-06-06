@@ -1,10 +1,8 @@
 import { Button } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 
-function NavBar() {
-  return (
-    <nav className="NavBar">
+function NavBarVehicles() {
+  return <nav className="NavBar">
           <Button className="nav-item">
             <Link className="nav-link" to="/api/vehicles/Brands">
               Marcas
@@ -25,8 +23,7 @@ function NavBar() {
               Vehiculos
             </Link>
           </Button>
-    </nav>
-  );
+    </nav>;
 }
 
-export default NavBar;
+export default NavBarVehicles;

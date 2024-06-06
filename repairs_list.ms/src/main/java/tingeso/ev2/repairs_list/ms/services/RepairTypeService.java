@@ -15,16 +15,16 @@ public class RepairTypeService {
     RepairTypeRepository repairTypeRepository;
 
     //Find all repairs types.
-    List<RepairTypeEntity> get_repair_list(){
+    public List<RepairTypeEntity> get_repair_list(){
         return repairTypeRepository.findAllRepairTypes();
     }
 
-    RepairTypeEntity get_repair_type_by_id(Long id){
+    public RepairTypeEntity get_repair_type_by_id(Long id){
         return repairTypeRepository.findById(id).orElse(null);
     }
 
     //Create
-    RepairTypeEntity create(RepairTypeEntity newRepairType){
+     public  RepairTypeEntity create(RepairTypeEntity newRepairType){
         //SI es que el tipo de reparacion no existe
         return repairTypeRepository.save(newRepairType);
     }

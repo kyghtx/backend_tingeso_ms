@@ -1,6 +1,5 @@
 import { Outlet,Link } from "react-router-dom";
-import NavBar from "./NavBar";
-import { Box, Container } from "@mui/material";
+import NavBarVehicles from "./NavBarVehicles";
 import logo from '../assets/logo.png';
 
 function Layout() {
@@ -9,7 +8,7 @@ function Layout() {
       <header className="logo-container">
           <img src={logo} alt="LogoAutofix" height="200px"/>
           <h1><Link to="/">AUTOFIX</Link></h1>
-          <NavBar/>
+          <NavBarVehicles/>
       </header>
       
       <main className="route-container">

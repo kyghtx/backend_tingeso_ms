@@ -1,11 +1,8 @@
 import './App.css'
 import { Route,BrowserRouter,Routes } from 'react-router-dom'
-import VehiclesList from './components/VehiclesList'
 import CreateBrand from "./components/CreateBrand"
-import BrandList from './components/BrandList'
 import CreateVehicleType from './components/CreateVehicleType'
 import CreateMotorType from './components/CreateMotorType'
-import NavBar from './components/NavBar'
 import Layout from './components/Layout'
 import CreateVehicle from './components/CreateVehicle'
 

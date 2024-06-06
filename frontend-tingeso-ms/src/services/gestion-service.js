@@ -3,7 +3,9 @@ const VEHICLES_API_URL = "http://localhost:8080/api/vehicles"
 const BRAND_API_URL= "http://localhost:8080/api/vehicles/brands"
 const VEHICLE_TYPES_API_URL="http://localhost:8080/api/vehicles/types"
 const VEHICLE_MOTORS_API_URL="http://localhost:8080/api/vehicles/motor_types"
+const REPAIRS_LIST_API_URL="http://localhost:8080/api/repair_types"
 
+/*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
     return axios.post(VEHICLES_API_URL,vehicle);
 
@@ -34,4 +36,13 @@ function getMotorTypes(){
 function createMotorType(motorType){
     return axios.post(VEHICLE_MOTORS_API_URL,motorType);
 }
-export default {getVehicles,createBrand,getBrands,getVehicleTypes,createVehicleType,getMotorTypes,createMotorType,createVehicle}
+
+/*Ahora lo de las lista de reparaciones*/
+function getRepairTypes(){
+    return axios.get(REPAIRS_LIST_API_URL)
+}
+
+export default {getVehicles,createBrand,getBrands,getVehicleTypes,
+    createVehicleType,getMotorTypes,createMotorType,createVehicle,
+    getRepairTypes
+}

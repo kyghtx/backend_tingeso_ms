@@ -27,5 +27,4 @@ spring:
         - id: repairs-list.ms
           uri: lb://repairs-list.ms:8091
           predicates:
-            - Path=/api/repairs_prices/**
             - Path=/api/repairs_types/**

@@ -5,25 +5,25 @@ export function GeneralNavBar(){
     return(
         <nav className="NavBar">
           <Button className="nav-item">
-            <Link className="nav-link" to="/api/vehicles/Brands">
-              Marcas
+            <Link className="nav-link" to="/api/vehicles">
+              Gestion Vehiculos
             </Link>
           </Button>
           <Button className="nav-item">
-            <Link className="nav-link" to="/api/vehicles/Types">
-              Tipos de vehiculos
+            <Link className="nav-link" to="/api/repairs_types">
+              Gestion de Reparaciones
             </Link>
           </Button>
           <Button className="nav-item">
             <Link className="nav-link" to="/api/vehicles/MotorTypes">
-              Tipos de motor
+              Ingresar Reparaciones
             </Link>
           </Button>
           <Button className="nav-item">
             <Link className="nav-link" to="/api/vehicles">
-              Vehiculos
+              Reportes
             </Link>
           </Button>
     </nav>)
-    
+
 }

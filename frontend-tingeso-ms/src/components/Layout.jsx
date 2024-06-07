@@ -7,8 +7,9 @@ function Layout() {
     return (  
     <div className = "Layout-Container">
       <header className="logo-container">
-          <img src={logo} alt="LogoAutofix" height="200px"/>
-          <h1><Link to="/">AUTOFIX</Link></h1>
+          <Link to="/"><img src={logo} alt="LogoAutofix" height="200px"/></Link>
+            
+          <h1></h1>
           <GeneralNavBar/>
       </header>
       

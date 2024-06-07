@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import NavBarVehicles from "./NavBarVehicles";
 
 export default function CreateVehicle() {
   /*Atributes of a vehicle for him creation*/
@@ -97,7 +98,9 @@ export default function CreateVehicle() {
 
   return (
     <>
+    
       <Box className="containerBrands">
+      <NavBarVehicles/>
         <Box className="containerFormBrands">
           <h1 className="CreateVehicleForm">Crear Vehiculo</h1>
           <form className="border row g-3 px-4" onSubmit={handleCreateVehicle}>

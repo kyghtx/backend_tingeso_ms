@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function NavBarVehicles() {
-  return <nav className="NavBar">
+  return <nav className="NavBarVehicles">
           <Button className="nav-item">
             <Link className="nav-link" to="/api/vehicles/Brands">
               Marcas

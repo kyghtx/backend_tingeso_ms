@@ -93,7 +93,13 @@ button:focus-visible {
 .NavBar{
   display: flex;
   justify-content: space-around;
+  flex-direction: row;
   flex-grow: 4;
+}
+.NavBarVehicles{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 @media (prefers-color-scheme: light) {
   :root {

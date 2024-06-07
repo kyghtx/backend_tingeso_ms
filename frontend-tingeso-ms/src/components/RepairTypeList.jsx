@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import gestionService from "../services/gestion-service";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-export default function RepairsList() {
+import { Description } from "@mui/icons-material";
+export default function RepairsTypeList() {
   const [repairsList, setRepairs] = useState([]);
 
   async function fetchRepairsList() {
     try {
       const response = await gestionService.getRepairList();
-      setTypes(response.data);
+      setRepairs(response.data);
     } catch (error) {
       alert("Error al obtener los tipos de reparacion.");
     }
@@ -25,10 +26,16 @@ export default function RepairsList() {
     field: 'Repair_type',
     headerName: 'Tipo De Reparacion',
     width: 150
+  },{
+    field: 'Description',
+    headerName: 'Descripcion',
+    width: 150
   }];
   const rows = repairsList.map((rl, index) => ({
     id: index + 1,
-    Repair_type: rl.repair_type_name
+    Repair_type: rl.repair_type_name,
+    Description: rl.description
+
   }));
   return <Box sx={{
     height: '90%',

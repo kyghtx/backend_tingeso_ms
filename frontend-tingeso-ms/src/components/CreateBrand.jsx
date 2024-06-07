@@ -2,6 +2,7 @@ import React, { useState,useRef } from "react";
 import gestionService from "../services/gestion-service";
 import { Container, TextField, Box, Button } from "@mui/material";
 import BrandList from "./BrandList";
+import NavBarVehicles from "./NavBarVehicles";
 
 
 
@@ -25,6 +26,7 @@ export default function CreateBrand() {
   return (
     <>
     <Box className="containerBrands">
+    <NavBarVehicles/>
       <Box className="containerFormBrands">
         <h1 className="CreateVehicleForm">Crear Marca</h1>
         <form className="border row g-3 px-4" onSubmit={handleCreateBrand}>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import gestionService from "../services/gestion-service";
 import { Container, TextField,Table,TableHead,TableCell,TableRow, Box, Button} from "@mui/material";
-import { useEffect} from "react";
-import BrandList from "./BrandList";
 import MotorTypesList from "./MotorTypesList";
+import NavBarVehicles from "./NavBarVehicles";
 
 export default function CreateMotorType() {
   const [motor_type_name, setMotorName] = useState("");
@@ -24,6 +23,7 @@ export default function CreateMotorType() {
 
   return (
     <><Box className="containerBrands">
+      <NavBarVehicles/>
       <Box className="containerFormBrands">
         <h1 className="CreateVehicleForm">Crear tipo de motor</h1>
         <form className="border row g-3 px-4" onSubmit={handleCreateMotorType}>

@@ -6,6 +6,8 @@ import CreateMotorType from './components/CreateMotorType'
 import Layout from './components/Layout'
 import CreateVehicle from './components/CreateVehicle'
 
+import CreateRepairType from './components/CreateRepairType'
+
 function App() {
   return (
     
@@ -16,6 +18,8 @@ function App() {
       <Route path='/api/vehicles/Brands' element={<CreateBrand/>}/>
       <Route path='/api/vehicles/Types' element={<CreateVehicleType/>}/>
       <Route path='/api/vehicles/MotorTypes' element={<CreateMotorType/>}/>
+      <Route path='/api/repairs_types' element={<CreateRepairType/>}/>
+
       </Route>
  
  

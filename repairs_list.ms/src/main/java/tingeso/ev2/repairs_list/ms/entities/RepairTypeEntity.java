@@ -15,7 +15,7 @@ public class RepairTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long repair_type_id;
-    private String repair_type_name;
+    private String repair_type_name; //tipo de reparacion
     private String description;
 
     public Long getRepair_type_id() {

@@ -9,7 +9,7 @@ function NavBarRepairsList() {
             </Link>
           </Button>
           <Button className="nav-item">
-            <Link className="nav-link" to="/api/repairs_types/repair_prices">
+            <Link className="nav-link" to="/api/repairs_types/repairs_prices">
               Precios
             </Link>
           </Button>

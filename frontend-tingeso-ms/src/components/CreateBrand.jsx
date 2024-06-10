@@ -3,9 +3,6 @@ import gestionService from "../services/gestion-service";
 import { Container, TextField, Box, Button } from "@mui/material";
 import BrandList from "./BrandList";
 import NavBarVehicles from "./NavBarVehicles";
-
-
-
 export default function CreateBrand() {
   const [brand_name, setBrandName] = useState("");
   async function handleCreateBrand(event) {

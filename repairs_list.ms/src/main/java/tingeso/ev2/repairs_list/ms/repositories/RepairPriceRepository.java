@@ -16,8 +16,8 @@ public interface RepairPriceRepository  extends JpaRepository<RepairPriceEntity,
     @Query("SELECT rp FROM RepairPriceEntity rp")
     List<RepairPriceEntity> findAllRepairPrices();
 
-    @Query("SELECT rp FROM RepairPriceEntity rp WHERE rp.vehicle_type_id =:vehicle_type_id AND rp.repair_type_id =:repair_type_id")
-    RepairPriceEntity findRepairPriceEntitiesByVehicleTypeIdAndRepairTypeId(@Param("vehicle_type_id") Long vehicle_type_id, @Param("repair_type_id") Long repair_type_id);
+    @Query("SELECT rp FROM RepairPriceEntity rp WHERE rp.motor_type_id =:motor_type_id AND rp.repair_type_id =:repair_type_id")
+    RepairPriceEntity findRepairPriceEntitiesByVehicleTypeIdAndRepairTypeId(@Param("motor_type_id") Long vehicle_type_id, @Param("repair_type_id") Long repair_type_id);
 
 
 }

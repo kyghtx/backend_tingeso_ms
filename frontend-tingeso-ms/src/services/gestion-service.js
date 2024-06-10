@@ -5,6 +5,8 @@ const VEHICLE_TYPES_API_URL="http://localhost:8080/api/vehicles/types"
 const VEHICLE_MOTORS_API_URL="http://localhost:8080/api/vehicles/motor_types"
 //lo siguiente queda a revision por tema de configuracion con el Gateway!!
 const REPAIRS_LIST_API_URL="http://localhost:8091/api/repairs_types"
+const REPAIRS_LIST_MOTOR_TYPES="http://localhost:8091/api/repairs_types/repairs_prices/motor_types"
+const REPAIRS_PRICES_LIST ="http://localhost:8091/api/repairs_types/repairs_prices"
 
 /*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
@@ -46,6 +48,19 @@ function createRepairType(repair){
     return axios.post(REPAIRS_LIST_API_URL,repair);
 }
 
+function getMotorTypesFromRepairListMs(){
+    return axios.get(REPAIRS_LIST_MOTOR_TYPES);
+
+}
+function getRepairPrices(){
+    return axios.get(REPAIRS_PRICES_LIST);
+}
+
+function createRepairPrices(repairs){
+    return axios.post(REPAIRS_PRICES_LIST,repairs);
+}
+
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,
     createVehicleType,getMotorTypes,createMotorType,createVehicle,
-    getRepairList,createRepairType}
+    getRepairList,createRepairType,getMotorTypesFromRepairListMs,
+getRepairPrices,createRepairPrices}

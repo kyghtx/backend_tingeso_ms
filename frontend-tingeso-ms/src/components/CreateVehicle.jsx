@@ -98,7 +98,6 @@ export default function CreateVehicle() {
 
   return (
     <>
-    
       <Box className="containerBrands">
       <NavBarVehicles/>
         <Box className="containerFormBrands">

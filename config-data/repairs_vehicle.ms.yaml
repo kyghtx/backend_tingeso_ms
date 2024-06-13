@@ -2,12 +2,12 @@ server:
   port: 8092
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/repair_list_ms
+    url: jdbc:postgresql://localhost:5434/repair-vehicle-db
     username: postgres
     password: 123456
 eureka:
   instance:
-    hostname: localhost
+    preferIpAddress: true
   client:
     fetch-registry: true
     register-with-eureka: true

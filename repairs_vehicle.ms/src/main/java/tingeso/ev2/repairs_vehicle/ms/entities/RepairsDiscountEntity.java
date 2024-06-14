@@ -1,4 +1,4 @@
-package entities;
+package tingeso.ev2.repairs_vehicle.ms.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

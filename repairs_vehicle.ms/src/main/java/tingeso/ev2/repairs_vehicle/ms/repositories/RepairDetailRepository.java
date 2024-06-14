@@ -1,6 +1,6 @@
-package repositories;
+package tingeso.ev2.repairs_vehicle.ms.repositories;
 
-import entities.RepairDetailEntity;
+import tingeso.ev2.repairs_vehicle.ms.entities.RepairDetailEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

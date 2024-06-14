@@ -1,11 +1,11 @@
-package service;
+package tingeso.ev2.repairs_vehicle.ms.service;
 
-import entities.RepairDetailEntity;
-import entities.RepairVehicleEntity;
+import tingeso.ev2.repairs_vehicle.ms.entities.RepairDetailEntity;
+import tingeso.ev2.repairs_vehicle.ms.entities.RepairVehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.RepairDetailRepository;
-import repositories.RepairVehicleRepository;
+import tingeso.ev2.repairs_vehicle.ms.repositories.RepairDetailRepository;
+import tingeso.ev2.repairs_vehicle.ms.repositories.RepairVehicleRepository;
 
 import java.util.List;
 

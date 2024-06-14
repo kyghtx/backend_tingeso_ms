@@ -1,4 +1,4 @@
-package dto;
+package tingeso.ev2.repairs_vehicle.ms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

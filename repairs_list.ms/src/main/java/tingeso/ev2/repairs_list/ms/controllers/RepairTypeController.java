@@ -8,7 +8,6 @@ import tingeso.ev2.repairs_list.ms.services.RepairTypeService;
 
 @RestController
 @RequestMapping("/api")
-
 public class RepairTypeController {
     @Autowired
     RepairTypeService repairTypeService;

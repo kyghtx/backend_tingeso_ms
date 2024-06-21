@@ -9,7 +9,6 @@ import tingeso.ev2.repairs_vehicle.ms.service.RepairVehicleService;
 
 @RestController
 @RequestMapping("/api/repairs_vehicles")
-@CrossOrigin("*")
 public class RepairVehicleController {
     @Autowired
     private RepairVehicleService repairVehicleService;

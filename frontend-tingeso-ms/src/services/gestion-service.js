@@ -4,11 +4,11 @@ const BRAND_API_URL= "http://localhost:8080/api/vehicles/brands"
 const VEHICLE_TYPES_API_URL="http://localhost:8080/api/vehicles/types"
 const VEHICLE_MOTORS_API_URL="http://localhost:8080/api/vehicles/motor_types"
 //lo siguiente queda a revision por tema de configuracion con el Gateway!!
-const REPAIRS_LIST_API_URL="http://localhost:8091/api/repairs_types"
-const REPAIRS_LIST_MOTOR_TYPES="http://localhost:8091/api/repairs_types/repairs_prices/motor_types"
-const REPAIRS_PRICES_LIST ="http://localhost:8091/api/repairs_types/repairs_prices"
-const VEHICLES_FROM_REPAIR="http://localhost:8092/api/repairs_vehicles/vehicles"
-const RL_FROM_REPAIR_VEHICLES="http://localhost:8092/api/repair_vehicles/repair_types"
+const REPAIRS_LIST_API_URL="http://localhost:8080/api/repairs_types"
+const REPAIRS_LIST_MOTOR_TYPES="http://localhost:8080/api/repairs_types/repairs_prices/motor_types"
+const REPAIRS_PRICES_LIST ="http://localhost:8080/api/repairs_types/repairs_prices"
+const VEHICLES_FROM_REPAIR="http://localhost:8080/api/repairs_vehicles/vehicles"
+const RL_FROM_REPAIR_VEHICLES="http://localhost:8080/api/repair_vehicles/repair_types"
 /*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
     return axios.post(VEHICLES_API_URL,vehicle);

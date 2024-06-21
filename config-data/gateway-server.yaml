@@ -38,6 +38,6 @@ spring:
           predicates:
             - Path=/api/repairs_types/**
         - id: repairs_vehicle.ms
-          uri: lb://repairs_vehicle.ms:8092
+          uri: lb://repairs-vehicle.ms:8092
           predicates:
             - Path=/api/repairs_vehicles/**

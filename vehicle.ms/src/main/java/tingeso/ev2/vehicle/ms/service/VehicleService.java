@@ -70,9 +70,13 @@ public class VehicleService {
         vehicleRepository.deleteAll();
     }
 
-    //Obtain custom data from vehicles
-    public List<VehicleDTO> getCustomVehicles(){
-        return vehicleRepository.findCustomVehicleData();
-    }
+   public VehicleEntity updateKmVehicle(Long newKm, String patent){
+        VehicleEntity v = vehicleRepository.findByPatent(patent);
+        if (v != null){
+            v.setKm_vehicle(newKm);
+            return vehicleRepository.save(v);
+        }
+        return null;
 
+   }
 }

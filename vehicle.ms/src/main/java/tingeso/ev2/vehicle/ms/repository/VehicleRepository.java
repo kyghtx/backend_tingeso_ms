@@ -1,6 +1,7 @@
 package tingeso.ev2.vehicle.ms.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,6 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity,Long> {
     @Query("DELETE FROM VehicleEntity")
     void deleteAll();
 
-    @Query(value = "SELECT new tingeso.ev2.vehicle.ms.DTO.VehicleDTO(v.patent, vb.brand_name, vt.vehicle_type_name, vm.motor_type_name) " +
-            " FROM vehicle_entity v JOIN vehicle_type_entity vt ON v.vehicle_type_id = vt.vehicle_type_id " +
-            "JOIN v ON v.brand_id = vehicle_brand_entity.brand_id " +
-            "JOIN vehicle_motor_type_entity ON vehicle_entity.motor_type_id = vehicle_motor_type_entity.motor_type_id",nativeQuery = true)
-    List<VehicleDTO> findCustomVehicleData();
+
 
 }

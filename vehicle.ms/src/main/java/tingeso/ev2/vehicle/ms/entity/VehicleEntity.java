@@ -1,9 +1,7 @@
 package tingeso.ev2.vehicle.ms.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
@@ -26,6 +24,9 @@ public class VehicleEntity {
     //fk vehicle type
     private Long vehicle_type_id;
     private int year_of_manufacturing;
+    @Getter
+    @Setter
+    private Long km_vehicle;
     @Column(name= "Year")
     public int getYear_of_manufacturing() {
         return year_of_manufacturing;

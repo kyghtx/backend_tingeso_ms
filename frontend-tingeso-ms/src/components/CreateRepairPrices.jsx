@@ -91,7 +91,7 @@ function FormularioReparaciones() {
   return (
     <form onSubmit={handleSubmit}>
       {renderInputs()}
-      <button type="submit">Guardar Reparaciones</button>
+      <button type="submit">Guardar Precios</button>
     </form>
   );
 }

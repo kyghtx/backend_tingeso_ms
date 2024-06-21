@@ -27,6 +27,11 @@ public class VehicleController {
     ResponseEntity<?> getVehicleByPatent(@PathVariable("patent") String patent){
         return ResponseEntity.ok(vehicleService.find_by_patent(patent));
     }
+    @PutMapping("/vehicles/{patent}")
+    ResponseEntity<?> updateKmVehicle(@PathVariable("patent") String patent, @RequestParam("KM") Long newKm){
+       return ResponseEntity.ok(vehicleService.updateKmVehicle(newKm, patent));
+    }
+
 
     //CREATE
     @PostMapping("/vehicles")

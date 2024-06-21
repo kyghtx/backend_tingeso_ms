@@ -29,11 +29,11 @@ public class RepairVehicleEntity {
     @Getter @Setter
     private Long total_price_repairs;//possibly without discounts
     @Getter @Setter
-    private Long surcharges_mount;
+    private double surcharges_mount;
     @Getter @Setter
-    private Long discounts_mount;
+    private double discounts_mount;
     @Getter @Setter
-    private Long iva_mount;
+    private double iva_mount;
     @Getter @Setter
     //mount with discounts, surcharges and bonus
     private Long total_cost;
@@ -46,6 +46,8 @@ public class RepairVehicleEntity {
     private LocalDate vehicle_client_retire;
     @Getter @Setter
     private LocalTime vehicle_client_retire_hour;
+    @Getter @Setter
+    private int state;
 
 
 

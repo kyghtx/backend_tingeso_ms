@@ -9,7 +9,7 @@ import lombok.Setter;
 
 public class RepairVehicleDTO {
     @Getter @Setter
-    private String patent;
+    private Long vehicle_id;
     @Getter @Setter
     private Long repair_type_id;
 }

@@ -21,6 +21,8 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity,Long> {
     @Query("SELECT v FROM VehicleEntity v WHERE v.patent =:patent")
     VehicleEntity findByPatent(@Param("patent") String patent);
 
+    @Query("SELECT v FROM VehicleEntity v WHERE v.vehicle_id =:vehicle_id")
+    VehicleEntity findByVehicleId(@Param("vehicle_id") Long vehicle_id);
     //Select all vehicles from a type.
     @Query("SELECT v FROM VehicleEntity v WHERE v.vehicle_type_id =:type_vehicle")
     List<VehicleEntity> getAllVehiclesFromAType(@Param("type_vehicle") Long type_vehicle);

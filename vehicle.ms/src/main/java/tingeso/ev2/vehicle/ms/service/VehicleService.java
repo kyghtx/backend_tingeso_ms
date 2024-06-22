@@ -36,6 +36,10 @@ public class VehicleService {
         return vehicleRepository.findByPatent(patent);
     }
     //CREATE
+    public VehicleEntity findById(Long id){
+        return vehicleRepository.findByVehicleId(id);
+        
+    }
     public VehicleEntity create(VehicleEntity vehicle){
 
 
@@ -53,7 +57,8 @@ public class VehicleService {
 
 
         if (exist_patent == null && exist_brand != null && exist_motor_type != null && exist_type != null){
-        vehicleRepository.save(vehicle);
+            vehicle.setKm_vehicle(0L);
+            vehicleRepository.save(vehicle);
         return vehicle;
         }
         return null;

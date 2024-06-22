@@ -10,8 +10,8 @@ import java.util.List;
 
 @FeignClient(value="vehicles.ms",path = "/api/vehicles")
 public interface VehiclesClient {
-    @GetMapping("/{patent}")
-    ResponseEntity<VehicleFeign> getVehicle(@PathVariable("patent") String patent);
+    @GetMapping("/{vehicle_id}")
+    ResponseEntity<VehicleFeign> getVehicle(@PathVariable("vehicle_id") Long vehicle_id);
 
     @GetMapping("")
     ResponseEntity<List<VehicleFeign>> getAllVehicles();

@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import tingeso.ev2.repairs_vehicle.ms.dto.RepairVehicleDTO;
 import tingeso.ev2.repairs_vehicle.ms.service.RepairVehicleService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/repairs_vehicles")
@@ -24,6 +27,10 @@ public class RepairVehicleController {
     @GetMapping("/repair_types")
     ResponseEntity<?> getRepairTypesFeign(){
         return ResponseEntity.ok(repairVehicleService.getRepairTypes());
+    }
+    @PostMapping("")
+    ResponseEntity<?> createRepairVehicles(@RequestBody List<RepairVehicleDTO> repairsVehicle){
+        return ResponseEntity.ok(repairVehicleService.saveRepairAndDetails(repairsVehicle));
     }
 
 

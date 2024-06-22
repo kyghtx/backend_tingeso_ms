@@ -26,10 +26,13 @@ public class RepairVehicleService {
 
     @Autowired
     RepairVehicleRepository repairVehicleRepository;
+    @Autowired
     RepairDetailRepository repairDetailRepository;
+    @Autowired
     RepairDiscountRepository repairDiscountRepository;
-
+    @Autowired
     KmSurchargeRepository kmSurchargeRepository;
+    @Autowired
     AntiquitySurchargeRepository antiquitySurchargeRepository;
 
     public List<VehicleFeign> getVehiclesForRepairVehiclesMS(){
@@ -99,6 +102,7 @@ public class RepairVehicleService {
 
 
     public String calculateRepairDiscountRange(Long cantidadReparaciones){
+        if (cantidadReparaciones == 0){return "0";}
         if (cantidadReparaciones >= 1 && cantidadReparaciones <= 2){ return "1-2";}
         if (cantidadReparaciones >= 3 && cantidadReparaciones <= 5){return "3-5";}
         if (cantidadReparaciones >= 6 && cantidadReparaciones <= 9){return  "6-9";}
@@ -135,7 +139,7 @@ public class RepairVehicleService {
         /*for*/
         /*I need multiply details... one for each repair?*/
         //fetch of vehicle to assign repair
-        VehicleFeign vehicle = vehicleClient.getVehicle(newsVehicleRepair.get(0).getPatent()).getBody();
+        VehicleFeign vehicle = vehicleClient.getVehicle(newsVehicleRepair.get(0).getVehicle_id()).getBody();
 
         if (vehicle != null) {
             Long TotalPriceOfRepairs= 0L;
@@ -170,7 +174,13 @@ public class RepairVehicleService {
             /*Descuentos por reparaciones*/
             Long QuantityOfRepairs= repairVehicleRepository.countRepairsFromAVehicleLast12Months(vehicle.getVehicle_id(), LocalDate.now().minusMonths(12));
             String RepairDiscountRange=  calculateRepairDiscountRange(QuantityOfRepairs);
-            double repairsDiscount= repairDiscountRepository.getRepairDiscount(QuantityOfRepairs,RepairDiscountRange).getRepair_discount();
+            double repairsDiscount;
+            if(RepairDiscountRange.equals("0")){
+                repairsDiscount = 0;
+            }else{
+            repairsDiscount= repairDiscountRepository.getRepairDiscount(QuantityOfRepairs,RepairDiscountRange).getRepair_discount();
+            }
+
             /*descuento por bonos si aplica (solo un bono por reparacion.)*/
 
             /*descuento por dia de atencion.*/
@@ -200,7 +210,9 @@ public class RepairVehicleService {
             repairDetailRepository.saveAll(RepairDetailsToSave); /*All the details of the repair */
 
             /*now i create te RepairVehicleEntity with all required data*/
+
             newRepair.setTotal_price_repairs(TotalPriceOfRepairs);
+
             /*now i calculate the surcharges mount*/
             double SurchargesMount = TotalPriceOfRepairs*recargo_km + TotalPriceOfRepairs*recargo_antiguedad;
             newRepair.setSurcharges_mount(SurchargesMount);
@@ -212,13 +224,26 @@ public class RepairVehicleService {
             if (discountDay()){
                 DiscountMount = DiscountMount + TotalPriceOfRepairs * 0.1;
             }
+
+            /*TotalCost*/
+            Long totalCost = 
+
+
+            newRepair.setTotal_cost();
             /*Si aplica bono */
             //TODO: ver implementacion del bono
             /*now i set the values*/
 
 
+            /*Finally, i can save the repair.*/
+            repairVehicleRepository.save(newRepair);
+            return newRepair.toString();
+
+
         }
-        return newRepair.toString();
+
+        return  "No se pudo crear la reparacion";
+
 
     }
 

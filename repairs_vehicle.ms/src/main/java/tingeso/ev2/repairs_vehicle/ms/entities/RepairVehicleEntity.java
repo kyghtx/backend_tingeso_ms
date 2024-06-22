@@ -36,7 +36,7 @@ public class RepairVehicleEntity {
     private double iva_mount;
     @Getter @Setter
     //mount with discounts, surcharges and bonus
-    private Long total_cost;
+    private double total_cost;
     @Getter @Setter
     private LocalDate vehicle_outcome;
     @Getter @Setter

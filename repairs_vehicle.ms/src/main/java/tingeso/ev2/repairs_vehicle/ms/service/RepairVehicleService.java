@@ -112,6 +112,16 @@ public class RepairVehicleService {
     }
     //Now to create a new repair.
 
+    public String ExistBonus(VehicleFeign vehicle){
+        /*method to know if exist a bonus for the brand of the vehicle.*/
+
+
+
+
+        return "Bono usado con éxito.";
+
+    }
+
     public boolean discountDay(){
         // Obtener la fecha y hora actual
         LocalDate fechaActual = LocalDate.now();
@@ -226,10 +236,13 @@ public class RepairVehicleService {
             }
 
             /*TotalCost*/
-            Long totalCost = 
+            double totalCostWithoutIVA = TotalPriceOfRepairs + SurchargesMount - DiscountMount;
+            double IVAmount=totalCostWithoutIVA*0.19;
+            double totalCostWithIVA=IVAmount + totalCostWithoutIVA;
 
 
-            newRepair.setTotal_cost();
+            newRepair.setTotal_cost(totalCostWithIVA);
+            newRepair.setIva_mount(IVAmount);
             /*Si aplica bono */
             //TODO: ver implementacion del bono
             /*now i set the values*/

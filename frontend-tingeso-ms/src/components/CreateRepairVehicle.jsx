@@ -56,15 +56,16 @@ function CreateRepairVehicle() {
     }
   };
 
-  const handleSubmit= async (event) =>{
+  async function handleSubmit(event){
     event.preventDefault();
     try {
-        const response = await gestionService.createRepairVehicles(event);
-        alert("Reparaciones guardadas con exito")
+        await gestionService.createRepairVehicles(selectedRepairs);
+        alert("Reparaciones guardadas con exito");
+        console.table(event);
     
     } catch (error) {
-        alert("Error al guardar reparaciones.");
-        
+        alert("Error al guardar reparaciones.");  
+        console.log(error); 
     }
   }
 
@@ -140,7 +141,7 @@ function CreateRepairVehicle() {
           {console.log(selectedRepairs)}
         </ul>
       </Box>
-      <Button variant="contained" onClick={handleSubmit(selectedRepairs)}> 
+      <Button variant="contained" onClick={(selectedRepairs) => handleSubmit(selectedRepairs)}> 
         Ingresar Reparaciones
       </Button>
     </Box>

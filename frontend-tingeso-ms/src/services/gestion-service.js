@@ -70,6 +70,7 @@ function getRepairListFromRepairVehicles(){
     return axios.get(RL_FROM_REPAIR_VEHICLES);
 }
 function createRepairVehicles(repairsVehicles){
+    console.table(repairsVehicles);
     return axios.post(REPAIRS_VEHICLES,repairsVehicles);
 }
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,

@@ -15,7 +15,7 @@ export function GeneralNavBar(){
             </Link>
           </Button>
           <Button className="nav-item">
-            <Link className="nav-link" to="/api/vehicles/MotorTypes">
+            <Link className="nav-link" to="/api/repair_vehicles/create">
               Ingresar Reparaciones
             </Link>
           </Button>

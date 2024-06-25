@@ -40,7 +40,7 @@ export default function VehicleList() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5, 10]}
-        checkboxSelection
+        checkboxSelection={false}
         disableRowSelectionOnClick
         initialState={{
           pagination: {

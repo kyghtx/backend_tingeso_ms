@@ -73,6 +73,7 @@ function createRepairVehicles(repairsVehicles){
     console.table(repairsVehicles);
     return axios.post(REPAIRS_VEHICLES,repairsVehicles);
 }
+
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,
     createVehicleType,getMotorTypes,createMotorType,createVehicle,
     getRepairList,createRepairType,getMotorTypesFromRepairListMs,

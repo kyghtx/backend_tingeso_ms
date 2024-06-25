@@ -16,6 +16,7 @@
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  height: 100%;
 }
 a {
   font-weight: 500;
@@ -40,6 +41,26 @@ body {
   color: white;
 }
 
+.createRepairVehicleContainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+.RepairVehicleContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.SelectVehicleAndRepairContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.AddAndSumbitContainer{
+  display: flex;
+  flex-direction: row;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -81,7 +102,7 @@ button:focus-visible {
   justify-content: space-between;
 }
 .Layout-Container{
-  width:90%;
+  width:  95%;
 }
 .logo-container{
   display: flex;

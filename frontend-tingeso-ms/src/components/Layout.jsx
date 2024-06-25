@@ -6,7 +6,7 @@ import { GeneralNavBar } from "./GeneralNavBar";
 function Layout() {
     return (  
     <div className = "Layout-Container">
-      <header className="logo-container">
+      <header className="logo-container" color="#379777">
           <Link to="/"><img src={logo} alt="LogoAutofix" height="200px"/></Link>
             
           <h1></h1>

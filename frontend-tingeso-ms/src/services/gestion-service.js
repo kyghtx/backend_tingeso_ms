@@ -10,6 +10,7 @@ const REPAIRS_PRICES_LIST ="http://localhost:8080/api/repairs_types/repairs_pric
 const VEHICLES_FROM_REPAIR="http://localhost:8080/api/repairs_vehicles/vehicles"
 const RL_FROM_REPAIR_VEHICLES="http://localhost:8080/api/repairs_vehicles/repair_types"
 const REPAIRS_VEHICLES="http://localhost:8080/api/repairs_vehicles"
+
 /*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
     return axios.post(VEHICLES_API_URL,vehicle);
@@ -73,9 +74,21 @@ function createRepairVehicles(repairsVehicles){
     console.table(repairsVehicles);
     return axios.post(REPAIRS_VEHICLES,repairsVehicles);
 }
+function getRepairsOfAVehicle(vehicle_id){
+    const REPAIRS_VEHICLE=`http://localhost:8080/api/repairs_vehicles/${vehicle_id}`;
 
+    return axios.get(REPAIRS_VEHICLE);
+}
+function getRepairDetailsVehicle(vehicle_id){
+    const REPAIRS_DETAILS=`http://localhost:8080/api/repairs_vehicles/repair_details/${vehicle_id}`
+    
+    return axios.get(REPAIRS_DETAILS);
+}
+function updateRepairsState(repairs){
+    return axios.put(REPAIRS_VEHICLES,repairs);
+}
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,
     createVehicleType,getMotorTypes,createMotorType,createVehicle,
     getRepairList,createRepairType,getMotorTypesFromRepairListMs,
 getRepairPrices,createRepairPrices,getVehiclesFromRepairVehicles,getRepairListFromRepairVehicles,
-createRepairVehicles}
+createRepairVehicles, getRepairsOfAVehicle,getRepairDetailsVehicle,updateRepairsState}

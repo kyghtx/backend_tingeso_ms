@@ -17,7 +17,7 @@ public class RepairVehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
-    private long repair_vehicle_id;
+    private Long repair_vehicle_id;
     //
     @Getter @Setter
     private Long vehicle_id;

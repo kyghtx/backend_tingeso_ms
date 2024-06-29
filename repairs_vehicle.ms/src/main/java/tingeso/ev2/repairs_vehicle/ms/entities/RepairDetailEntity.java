@@ -21,6 +21,8 @@ public class RepairDetailEntity {
     @Getter @Setter
     private String patent;
     @Getter @Setter
+    private Long vehicle_id;
+    @Getter @Setter
     private Long repair_type_id;
     @Getter @Setter
     private LocalDate repair_date;

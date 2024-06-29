@@ -26,8 +26,8 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.get_all_vehicles_by_type(type));
     }
     /*TODO: CAMBIAR A ID.*/
-    @PutMapping("/vehicles/{patent}")
-    ResponseEntity<?> updateKmVehicle(@PathVariable("patent") String patent, @RequestParam("KM") Long newKm){
+    @PutMapping("/vehicles/{id}")
+    ResponseEntity<?> updateKmVehicle(@PathVariable("id") String patent, @RequestParam("KM") Long newKm){
        return ResponseEntity.ok(vehicleService.updateKmVehicle(newKm, patent));
     }
 

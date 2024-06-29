@@ -110,14 +110,39 @@ public class RepairVehicleService {
 
         return "0";
     }
-    //Now to create a new repair.
+    public List<RepairVehicleEntity> getUnfinishedRepairsOfAVehicle(Long vehicleId){
 
+        return repairVehicleRepository.findUnfinishedRepairByVehicle(vehicleId);
+    }
+
+    /*method to update to state=1 a repair (finish)*/
+    public String finishRepairVehicle(List<RepairVehicleEntity> repairVehicleEntity){
+        /*set the new values*/
+        for (RepairVehicleEntity repairVehicle : repairVehicleEntity) {
+            repairVehicle.setState(1);
+            repairVehicle.setVehicle_outcome(LocalDate.now());
+            repairVehicle.setVehicle_outcome_hour(LocalTime.now());
+            repairVehicleRepository.save(repairVehicle);
+        }
+        /*this method will update a state of repairs.*/
+        return "Se finalizan las reparaciones de forma exitosa";
+    }
+
+    /*methos to update the date when the client retire his vehicle*/
+    public String clientRetiresVehicle(List<RepairVehicleEntity> repairVehicleEntity){
+        for (RepairVehicleEntity repairVehicle : repairVehicleEntity) {
+            repairVehicle.setVehicle_client_retire(LocalDate.now());
+            repairVehicle.setVehicle_client_retire_hour(LocalTime.now());
+            repairVehicleRepository.save(repairVehicle);
+        }
+        return "Cliente retira el vehiculo exitosamente";
+    }
+    //TODO: implements of bonus
     public String ExistBonus(VehicleFeign vehicle){
         /*method to know if exist a bonus for the brand of the vehicle.*/
-
-
-
-
+        /*Brand of the vehicle*/
+        Long id_brand = vehicle.getBrand_id();
+       /*name of the brand of the brand entity repository of  vehicle.ms */
         return "Bono usado con éxito.";
 
     }
@@ -209,15 +234,11 @@ public class RepairVehicleService {
 
                 /*now i instance*/
                 repairDetail.setPrice(repairPrice);
-                repairDetail.setRepair_vehicle_id(vehicle.getVehicle_id());
-
-
 
                 /*With that values, i can save in an arrayList previously to save in db*/
                 RepairDetailsToSave.add(i,repairDetail);
             }
             /*i save all repairDetailEntities*/
-            repairDetailRepository.saveAll(RepairDetailsToSave); /*All the details of the repair */
 
             /*now i create te RepairVehicleEntity with all required data*/
 
@@ -243,6 +264,8 @@ public class RepairVehicleService {
 
             newRepair.setTotal_cost(totalCostWithIVA);
             newRepair.setIva_mount(IVAmount);
+            newRepair.setDiscounts_mount(DiscountMount);
+
             /*Si aplica bono */
             //TODO: ver implementacion del bono
             /*now i set the values*/
@@ -250,6 +273,13 @@ public class RepairVehicleService {
 
             /*Finally, i can save the repair.*/
             repairVehicleRepository.save(newRepair);
+            for (RepairDetailEntity repairDetail : RepairDetailsToSave) {
+                repairDetail.setRepair_vehicle_id(newRepair.getRepair_vehicle_id());
+                repairDetail.setVehicle_id(vehicle.getVehicle_id());
+
+            }
+            repairDetailRepository.saveAll(RepairDetailsToSave); /*All the details of the repair */
+
             return newRepair.toString();
 
 
@@ -259,6 +289,11 @@ public class RepairVehicleService {
 
 
     }
+    public List<RepairDetailEntity> getDetailsOfARepair(Long repair_vehicle_id){
+        return repairDetailRepository.findAllDetailsOfRepairVehicle(repair_vehicle_id);
+
+    }
+
 
 
 

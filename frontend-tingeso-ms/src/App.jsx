@@ -10,6 +10,7 @@ import CreateRepairPrices from "./components/CreateRepairPrices";
 import CreateRepairVehicle from "./components/CreateRepairVehicle";
 import CompletedRepairsVehicles from "./components/CompletedRepairsVehicle";
 import { useState } from "react";
+import ReportsMenu from "./components/ReportsMenu";
 function App() {
   return (
    
@@ -37,6 +38,7 @@ function App() {
             element={<CompletedRepairsVehicles/>}
           />
         </Route>
+        <Route path="api/reports" element={<ReportsMenu/>}></Route>
       </Routes>
     </BrowserRouter>
   );

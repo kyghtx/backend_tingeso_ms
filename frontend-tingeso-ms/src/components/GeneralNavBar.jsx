@@ -20,7 +20,7 @@ export function GeneralNavBar(){
             </Link>
           </Button>
           <Button className="nav-item" variant="text" size="large">
-            <Link className="nav-link" to="/api/vehicles">
+            <Link className="nav-link" to="/api/reports">
               Reportes
             </Link>
           </Button>

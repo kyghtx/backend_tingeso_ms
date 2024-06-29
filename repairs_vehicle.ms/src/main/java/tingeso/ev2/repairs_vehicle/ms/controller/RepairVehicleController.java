@@ -20,6 +20,10 @@ public class RepairVehicleController {
     ResponseEntity<?> getUnfinishedRepairs(@PathVariable("vehicle_id") Long vehicle_id){
         return ResponseEntity.ok(repairVehicleService.getUnfinishedRepairsOfAVehicle(vehicle_id));
     }
+    @GetMapping("")
+    ResponseEntity<?> getAllVehicleRepairs(){
+        return  ResponseEntity.ok((repairVehicleService.getAllRepairVehicles()));
+    }
     /*method to get vehicles, and repair types from this ms*/
     @GetMapping("/vehicles")
     ResponseEntity<?> getVehiclesFeign(){

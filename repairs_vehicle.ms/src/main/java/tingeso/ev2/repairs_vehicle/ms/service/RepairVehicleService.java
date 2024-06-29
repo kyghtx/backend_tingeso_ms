@@ -34,8 +34,9 @@ public class RepairVehicleService {
     KmSurchargeRepository kmSurchargeRepository;
     @Autowired
     AntiquitySurchargeRepository antiquitySurchargeRepository;
+
     public List<RepairVehicleEntity> getAllRepairVehicles(){
-        return repairVehicleRepository.findAll();
+        return repairVehicleRepository.findAllRepairVehicles();
     }
 
     public List<VehicleFeign> getVehiclesForRepairVehiclesMS(){

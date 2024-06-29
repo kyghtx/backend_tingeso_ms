@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import tingeso.ev2.reports_uh.ms.services.R1Service;
 
 @RestController
-@RequestMapping("api/reports")
+@RequestMapping("/api/reports")
 public class ReportsController {
     @Autowired
     R1Service r1Service;
     @GetMapping("/1")
-    ResponseEntity<?> getAllRepairsForReport(@PathVariable Long report_id) {
+    ResponseEntity<?> getAllRepairsForReport() {
         return ResponseEntity.ok(r1Service.getAllRepair());
     }
 }

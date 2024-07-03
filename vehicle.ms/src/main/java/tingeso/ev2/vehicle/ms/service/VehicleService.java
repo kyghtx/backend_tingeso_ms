@@ -84,4 +84,7 @@ public class VehicleService {
         return null;
 
    }
+   public Long vehiclesFromAType(Long vehicle_type){
+        return vehicleRepository.countVehiclesByType(vehicle_type);
+   }
 }

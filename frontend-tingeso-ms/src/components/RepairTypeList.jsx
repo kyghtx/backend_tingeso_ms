@@ -42,7 +42,7 @@ export default function RepairsTypeList() {
     width: '50%'
   }} className="BrandList">
       <h1 className="HeadersList">Tipos de reparaciones</h1>
-      <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5, 10]} checkboxSelection disableRowSelectionOnClick initialState={{
+      <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5, 10]} checkboxSelection={false} disableRowSelectionOnClick={true} initialState={{
       pagination: {
         paginationModel: {
           page: 0,

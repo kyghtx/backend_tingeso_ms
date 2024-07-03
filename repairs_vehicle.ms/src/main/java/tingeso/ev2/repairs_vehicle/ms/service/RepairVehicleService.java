@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class RepairVehicleService {
@@ -37,6 +38,9 @@ public class RepairVehicleService {
 
     public List<RepairVehicleEntity> getAllRepairVehicles(){
         return repairVehicleRepository.findAllRepairVehicles();
+    }
+    public List<RepairDetailEntity> getAllRepairDetails(){
+        return repairDetailRepository.findAllRepairDetails();
     }
 
     public List<VehicleFeign> getVehiclesForRepairVehiclesMS(){
@@ -103,6 +107,12 @@ public class RepairVehicleService {
         return "error";
     }
 
+    public Long getTotalMountOfARepairType(Long repair_type_id, int mes, int año){
+        return repairDetailRepository.sumAllPricesOfARepairType(repair_type_id, mes, año);
+    }
+    public Long countAllRepairsOfAtype(Long repair_type_id,String patent, int month, int year){
+        return repairDetailRepository.sumAllRepairsOfATypOfAVehicle(repair_type_id,patent, month, year);
+    }
 
 
     public String calculateRepairDiscountRange(Long cantidadReparaciones){
@@ -232,7 +242,7 @@ public class RepairVehicleService {
                 repairDetail.setRepair_date(LocalDate.now());
                 repairDetail.setRepair_time(LocalTime.now());
                 /*Now i'll set the price of repair*/
-                Long repairPrice= repairTypesFeign.getRepairPrice(vehicle.getMotor_type_id(),newsVehicleRepair.get(i).getRepair_type_id()).getBody().getPrice();
+                Long repairPrice= Objects.requireNonNull(repairTypesFeign.getRepairPrice(vehicle.getMotor_type_id(), newsVehicleRepair.get(i).getRepair_type_id()).getBody()).getPrice();
                 /*increment the total cost of repairs*/
                 TotalPriceOfRepairs = TotalPriceOfRepairs + repairPrice;
 

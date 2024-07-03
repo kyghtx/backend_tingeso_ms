@@ -43,6 +43,10 @@ public class VehicleController {
         vehicleService.DeleteAllVehicles();
 
     }
-
+    //count by type
+    @GetMapping("/vehicles/count")
+    Long countAllVehiclesByType(@RequestParam Long type){
+        return vehicleService.vehiclesFromAType(type);
+    }
 
 }

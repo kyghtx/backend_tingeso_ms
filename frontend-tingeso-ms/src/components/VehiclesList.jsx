@@ -41,7 +41,7 @@ export default function VehicleList() {
         pageSize={5}
         rowsPerPageOptions={[5, 10]}
         checkboxSelection={false}
-        disableRowSelectionOnClick
+        disableRowSelectionOnClick={true}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
@@ -63,7 +63,7 @@ export default function VehicleList() {
           '& .MuiDataGrid-cell': {
             color: 'text.primary', // Color del texto en las celdas
           },
-          overflow:scroll
+          overflow:"scroll"
         }}
       />
     </Box>

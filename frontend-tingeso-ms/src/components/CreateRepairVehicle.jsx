@@ -220,14 +220,18 @@ function CreateRepairVehicle() {
         </Button>
         </Box>
       </Box>
-      <Box mt={2} sx={{width: "50%"}}>
+      <Box mt={2} sx={{width: "50%", display:"flex",flexDirection:"column", justifyContent:"space-around"}}>
+        <Box>HOLA
+        <Button color="secondary" variant="contained">Buscar reparaciones</Button>
+        </Box>
+        
         <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5} // Número de filas por página
         rowsPerPageOptions={[3,5,10]} // Opciones para el selector de filas por página
         checkboxSelection={false}
-        disableSelectionOnClick 
+        disableSelectionOnClick ={true}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

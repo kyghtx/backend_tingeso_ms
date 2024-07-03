@@ -16,6 +16,13 @@ public interface RepairDetailRepository extends JpaRepository<RepairDetailEntity
     /*select repair details of a repair*/
     @Query("SELECT rd FROM RepairDetailEntity rd WHERE rd.vehicle_id =:vehicle_id")
     List<RepairDetailEntity> findAllDetailsOfRepairVehicle(@Param("vehicle_id") Long vehicle_id);
+    @Query("SELECT rd FROM RepairDetailEntity rd")
+    List<RepairDetailEntity> findAllRepairDetails();
+    @Query("SELECT SUM(rd.price) FROM RepairDetailEntity rd WHERE rd.repair_type_id =:repair_type_id AND MONTH(rd.repair_date) = :month AND YEAR(rd.repair_date) = :year")
+    Long sumAllPricesOfARepairType(@Param("repair_type_id") Long repair_type_id,@Param("month") int month, @Param("year") int year);
+    @Query("SELECT COUNT(rd) FROM RepairDetailEntity  rd WHERE rd.repair_type_id =:repair_type_id AND rd.patent =:patent " +
+            "AND MONTH(rd.repair_date) = :month AND YEAR(rd.repair_date) = :year")
+    Long sumAllRepairsOfATypOfAVehicle(@Param("repair_type_id") Long repair_type_id, @Param("patent") String patent,@Param("month") int month, @Param("year") int year);
 
 
 

@@ -37,8 +37,8 @@ export default function MotorTypesList() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5, 10]}
-        checkboxSelection
-        disableRowSelectionOnClick
+        checkboxSelection={false}
+        disableRowSelectionOnClick={true}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },

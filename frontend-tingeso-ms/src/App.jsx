@@ -11,6 +11,7 @@ import CreateRepairVehicle from "./components/CreateRepairVehicle";
 import CompletedRepairsVehicles from "./components/CompletedRepairsVehicle";
 import { useState } from "react";
 import ReportsMenu from "./components/ReportsMenu";
+import Report1 from "./components/Report1";
 function App() {
   return (
    
@@ -39,6 +40,7 @@ function App() {
           />
         </Route>
         <Route path="api/reports" element={<ReportsMenu/>}></Route>
+        <Route path="api/reports/report_1" element={<Report1/>}></Route>
       </Routes>
     </BrowserRouter>
   );

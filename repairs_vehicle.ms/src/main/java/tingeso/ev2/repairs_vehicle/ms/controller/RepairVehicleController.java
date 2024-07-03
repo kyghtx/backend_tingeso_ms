@@ -48,9 +48,18 @@ public class RepairVehicleController {
     ResponseEntity<?> getDetailsOfARepairVehicle(@PathVariable("repair_vehicle_id") Long repair_vehicle_id){
         return ResponseEntity.ok(repairVehicleService.getDetailsOfARepair(repair_vehicle_id));
     }
-
-
-
+    @GetMapping("/repair_details")
+    ResponseEntity<?> getAllRepairDetails(){
+        return ResponseEntity.ok(repairVehicleService.getAllRepairDetails());
+    }
+    @GetMapping("/repair_details/{repair_type_id}/price")
+    ResponseEntity<Long> getTotalMountOfARepairType(@PathVariable Long repair_type_id, @RequestParam int month, @RequestParam int year){
+        return ResponseEntity.ok(repairVehicleService.getTotalMountOfARepairType(repair_type_id,month,year));
+    }
+    @GetMapping("/repair_details/count/{repair_type_id}-{patent}")
+    ResponseEntity<Long> countAllRepairType(@PathVariable Long repair_type_id,@PathVariable String patent,@RequestParam int month, @RequestParam int year){
+        return ResponseEntity.ok(repairVehicleService.countAllRepairsOfAtype(repair_type_id,patent, month, year));
+    }
 
 
 }

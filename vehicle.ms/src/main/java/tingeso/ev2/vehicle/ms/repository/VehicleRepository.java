@@ -34,7 +34,8 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity,Long> {
     //delete all Vehicles
     @Query("DELETE FROM VehicleEntity")
     void deleteAll();
-
+    @Query("SELECT COUNT(v) FROM VehicleEntity v where v.vehicle_type_id=:id")
+    Long countVehiclesByType(@Param("id") Long id);
 
 
 }

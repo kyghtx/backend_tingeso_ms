@@ -87,8 +87,13 @@ function getRepairDetailsVehicle(vehicle_id){
 function updateRepairsState(repairs){
     return axios.put(REPAIRS_VEHICLES,repairs);
 }
+/*get method for report 1*/
+function getReport1(month,year){
+    const REPORT1_URL = `http://localhost:8080/api/reports/report_1?month=${month}&year=${year}`;
+    return axios.get(REPORT1_URL);
+}
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,
     createVehicleType,getMotorTypes,createMotorType,createVehicle,
     getRepairList,createRepairType,getMotorTypesFromRepairListMs,
 getRepairPrices,createRepairPrices,getVehiclesFromRepairVehicles,getRepairListFromRepairVehicles,
-createRepairVehicles, getRepairsOfAVehicle,getRepairDetailsVehicle,updateRepairsState}
+createRepairVehicles, getRepairsOfAVehicle,getRepairDetailsVehicle,updateRepairsState, getReport1}

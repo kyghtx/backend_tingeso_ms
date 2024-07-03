@@ -11,5 +11,5 @@ import java.util.List;
 @FeignClient(value="repairs-list.ms",path = "/api/repairs_types")
 public interface RepairTypeClient {
     @GetMapping("")
-    ResponseEntity<List<RepairTypeFeign>> getRepairTypes();
+    List<RepairTypeFeign> getRepairTypes();
 }

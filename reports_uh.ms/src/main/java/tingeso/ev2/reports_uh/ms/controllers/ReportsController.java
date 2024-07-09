@@ -25,4 +25,8 @@ public class ReportsController {
     ResponseEntity<?> getAllRepairTypes() {
         return ResponseEntity.ok(r1Service.getAllRepairTypes());
     }
+    @GetMapping("/report_1/vehicle_types")
+    ResponseEntity<?> getAllVehicleTypes() {
+        return ResponseEntity.ok(r1Service.getAllVehicleTypes());
+    }
 }

@@ -52,9 +52,9 @@ public class RepairVehicleController {
     ResponseEntity<?> getAllRepairDetails(){
         return ResponseEntity.ok(repairVehicleService.getAllRepairDetails());
     }
-    @GetMapping("/repair_details/{repair_type_id}/price")
-    ResponseEntity<Long> getTotalMountOfARepairType(@PathVariable Long repair_type_id, @RequestParam int month, @RequestParam int year){
-        return ResponseEntity.ok(repairVehicleService.getTotalMountOfARepairType(repair_type_id,month,year));
+    @GetMapping("/repair_details/{repair_type_id}/{patent}/price")
+    ResponseEntity<Long> getTotalMountOfARepairType(@PathVariable Long repair_type_id, @RequestParam int month, @RequestParam int year,@PathVariable String patent){
+        return ResponseEntity.ok(repairVehicleService.getTotalMountOfARepairType(repair_type_id,month,year,patent));
     }
     @GetMapping("/repair_details/count/{repair_type_id}-{patent}")
     ResponseEntity<Long> countAllRepairType(@PathVariable Long repair_type_id,@PathVariable String patent,@RequestParam int month, @RequestParam int year){

@@ -38,9 +38,10 @@ function App() {
             path="/api/repair_vehicles/:vehicle_id"
             element={<CompletedRepairsVehicles/>}
           />
+           <Route path="api/reports" element={<ReportsMenu/>}></Route>
+           <Route path="api/reports/report_1" element={<Report1/>}></Route>
         </Route>
-        <Route path="api/reports" element={<ReportsMenu/>}></Route>
-        <Route path="api/reports/report_1" element={<Report1/>}></Route>
+       
       </Routes>
     </BrowserRouter>
   );

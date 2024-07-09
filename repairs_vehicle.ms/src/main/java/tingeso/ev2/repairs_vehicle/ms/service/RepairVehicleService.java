@@ -107,8 +107,8 @@ public class RepairVehicleService {
         return "error";
     }
 
-    public Long getTotalMountOfARepairType(Long repair_type_id, int mes, int año){
-        return repairDetailRepository.sumAllPricesOfARepairType(repair_type_id, mes, año);
+    public Long getTotalMountOfARepairType(Long repair_type_id, int mes, int year,String patent){
+        return repairDetailRepository.sumAllPricesOfARepairType(repair_type_id, mes, year, patent);
     }
     public Long countAllRepairsOfAtype(Long repair_type_id,String patent, int month, int year){
         return repairDetailRepository.sumAllRepairsOfATypOfAVehicle(repair_type_id,patent, month, year);
@@ -238,7 +238,7 @@ public class RepairVehicleService {
                 /*for each DTO, i build a Details of repairs*/
                 RepairDetailEntity repairDetail = new RepairDetailEntity();
                 repairDetail.setPatent(vehicle.getPatent());
-                repairDetail.setRepair_type_id(newsVehicleRepair.get(0).getRepair_type_id());
+                repairDetail.setRepair_type_id(newsVehicleRepair.get(i).getRepair_type_id());
                 repairDetail.setRepair_date(LocalDate.now());
                 repairDetail.setRepair_time(LocalTime.now());
                 /*Now i'll set the price of repair*/

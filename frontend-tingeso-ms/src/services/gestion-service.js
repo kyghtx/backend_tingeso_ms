@@ -10,7 +10,6 @@ const REPAIRS_PRICES_LIST ="http://localhost:8080/api/repairs_types/repairs_pric
 const VEHICLES_FROM_REPAIR="http://localhost:8080/api/repairs_vehicles/vehicles"
 const RL_FROM_REPAIR_VEHICLES="http://localhost:8080/api/repairs_vehicles/repair_types"
 const REPAIRS_VEHICLES="http://localhost:8080/api/repairs_vehicles"
-
 /*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
     return axios.post(VEHICLES_API_URL,vehicle);

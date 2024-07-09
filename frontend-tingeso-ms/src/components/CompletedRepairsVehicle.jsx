@@ -164,7 +164,7 @@ function CompletedRepairsVehicles() {
         pageSize={5}
         rowsPerPageOptions={[5, 10, 15]}
         checkboxSelection={false}
-        disableRowSelectionOnClick
+        disableRowSelectionOnClick={true}
         sx={{
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "primary.light", // Fondo de los encabezados de las columnas

@@ -126,8 +126,7 @@ function CompletedRepairsVehicles() {
             </Button>
 
             <Button
-              disabled={disabled} // Usamos el estado 'disabled' para deshabilitar el botón según la lógica establecida
-              variant="contained"
+              disabled={disabled} 
               color={buttonColor}
               onClick={() => handleAddRepair(params.row)}
               endIcon={<DeleteIcon />}

@@ -80,7 +80,7 @@ repairTypes.forEach((r) => {
 
   // Agregar datos de entitiesForReport para cada tipo de vehículo
   vehicleTypes.forEach((v) => {
-    const entity = entitiesForReport.find((e) => e.vehicle_type_name === v.vehicle_type_name);
+    const entity = entitiesForReport.find((e) => e.vehicle_type_name === v.vehicle_type_name && e.repair_type_name === r.repair_type_name);
     repairRow[v.vehicle_type_name] = entity ? entity.vehicle_type_quantity : 0;
   });
 
@@ -95,7 +95,7 @@ repairTypes.forEach((r) => {
 
   vehicleTypes.forEach((v)=>{
     const entity = entitiesForReport.find((e) => e.vehicle_type_name === v.vehicle_type_name && e.repair_type_name === r.repair_type_name);
-    emptyRow[v.vehicle_type_name] = entity ? entity.total_mount_repairs : 0 ;
+    emptyRow[v.vehicle_type_name] = entity && entity.total_mount_repairs >0 ? entity.total_mount_repairs : "-" ;
 
   });
 

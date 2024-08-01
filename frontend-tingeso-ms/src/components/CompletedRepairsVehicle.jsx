@@ -48,6 +48,9 @@ function CompletedRepairsVehicles() {
     setSelectedRepair(params.row);
     setPopoverOpen(true); // Abrir el popover
   };
+  const handleClientRetire =(params) => {
+    
+  }
 
   // Función para añadir una reparación seleccionada a selectedRepairs
   const handleAddRepair = (selectedRepair) => {
@@ -60,7 +63,7 @@ function CompletedRepairsVehicles() {
       setButtonState({ color: "success", text: "Finalizada", state: true });
       console.log("Reparación añadida:", selectedRepair);
     }
-  };
+  }; 
 
   async function handleSubmit(event) {
     event.preventDefault();

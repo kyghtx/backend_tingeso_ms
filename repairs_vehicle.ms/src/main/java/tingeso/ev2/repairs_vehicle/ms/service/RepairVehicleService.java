@@ -58,6 +58,9 @@ public class RepairVehicleService {
     public List<RepairDetailEntity> getAllRepairDetailsOfRepair(Long repair_vehicle_id){
         return repairDetailRepository.findAllDetailsOfRepairVehicle(repair_vehicle_id);
     }
+    public Long sumAllRepairOfAType(Long repair_type_id){
+        return repairDetailRepository.sumAllRepairsOfAType(repair_type_id);
+    }
     /*a method to compare strings, to get the kmSurchargeRange an AntiquitySurchargeRange.*/
     public String calculateKmRange(VehicleFeign vehicle) {
         Long km = vehicle.getKm_vehicle();
@@ -113,6 +116,13 @@ public class RepairVehicleService {
     public Long countAllRepairsOfAtype(Long repair_type_id,String patent, int month, int year){
         return repairDetailRepository.sumAllRepairsOfATypOfAVehicle(repair_type_id,patent, month, year);
     }
+    public Long SumAllRepairsOfATypeFromAMonth(Long repair_type_id, int month, int year){
+        return repairDetailRepository.sumAllRepairsOfATypeAndAMonth(repair_type_id, month, year);
+    }
+    public Long countAllRepairsOfATypeFromAMonth(Long repair_type_id, int month, int year){
+        return repairDetailRepository.countAllRepairsOfATypeOfAVehicleForAMonth(repair_type_id, month, year);
+    }
+
 
 
     public String calculateRepairDiscountRange(Long cantidadReparaciones){
@@ -182,8 +192,6 @@ public class RepairVehicleService {
     }
     public String saveRepairAndDetails(List<RepairVehicleDTO> newsVehicleRepair) {
 
-        //instance
-        /*acum for the total cost of repairs*/
         RepairVehicleEntity newRepair = new RepairVehicleEntity();
         /*for*/
         /*I need multiply details... one for each repair?*/
@@ -207,10 +215,6 @@ public class RepairVehicleService {
             newRepair.setVehicle_income_hour(LocalTime.now());
             //"Cada vez que deseo ingresar una reparacion. esta debe estar con un estado no finalizado"
             newRepair.setState(0); // initially state 0
-
-
-
-
             /*RECARGOS PARA EL VEHICULO*/
 
             /*Recargo por kilometraje*/
@@ -263,8 +267,6 @@ public class RepairVehicleService {
             newRepair.setSurcharges_mount(SurchargesMount);
 
             /*DISCOUNTS*/
-
-
             double DiscountMount = TotalPriceOfRepairs * repairsDiscount;
             if (discountDay()){
                 DiscountMount = DiscountMount + TotalPriceOfRepairs * 0.1;
@@ -282,8 +284,7 @@ public class RepairVehicleService {
 
             /*Si aplica bono */
             //TODO: ver implementacion del bono
-            /*now i set the values*/
-
+            /*now i set the values...*/
 
             /*Finally, i can save the repair.*/
             repairVehicleRepository.save(newRepair);

@@ -6,9 +6,6 @@ import tingeso.ev2.reports_uh.ms.client.RepairDetailClient;
 import tingeso.ev2.reports_uh.ms.client.RepairTypeClient;
 import tingeso.ev2.reports_uh.ms.client.VehiclesClient;
 import tingeso.ev2.reports_uh.ms.entities.*;
-
-import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,9 +34,6 @@ public class R1Service {
     /*Now i build the entities to show in frontend... */
     public List<R1Entity> buildEntitiesR1(int month, int year){
         List<RepairTypeFeign> repairTypes = repairTypeClient.getRepairTypes();
-        List<RepairVehicleFeign> repairVehicles=repairDetailClient.getAllVehicleRepairs();
-        List<RepairDetailFeign> repairDetails=repairDetailClient.getAllRepairDetails();
-        /*vehicle*/
         List<VehicleFeign> vehicles= vehiclesClient.getAllVehicles();
         List<VehicleTypeFeign> vehicleTypes=vehiclesClient.getAllVehicleTypes();
         List<R1Entity> entitiesR1=new ArrayList<>();

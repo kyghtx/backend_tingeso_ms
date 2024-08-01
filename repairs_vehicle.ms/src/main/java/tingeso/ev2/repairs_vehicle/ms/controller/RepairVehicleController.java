@@ -60,6 +60,20 @@ public class RepairVehicleController {
     ResponseEntity<Long> countAllRepairType(@PathVariable Long repair_type_id,@PathVariable String patent,@RequestParam int month, @RequestParam int year){
         return ResponseEntity.ok(repairVehicleService.countAllRepairsOfAtype(repair_type_id,patent, month, year));
     }
+    @GetMapping("/repair_details/sum/{repair_type_id}-{year}")
+    ResponseEntity<Long> SumAllRepairTypeOnAMonth(@PathVariable Long repair_type_id,@RequestParam int month,@PathVariable int year){
+        return ResponseEntity.ok(repairVehicleService.SumAllRepairsOfATypeFromAMonth(repair_type_id,month,year));
+    }
+    @GetMapping("/repair_details/{repair_type_id}")
+    ResponseEntity<Long> getRepairTypeDetails(@PathVariable Long repair_type_id){
+        return ResponseEntity.ok(repairVehicleService.sumAllRepairOfAType(repair_type_id));
+    }
+    @GetMapping("/repair_details/countRepairs/{repair_type_id}-{year}")
+    ResponseEntity<Long> countAllRepairTypeOnAMonth(@PathVariable Long repair_type_id,@RequestParam int month,@PathVariable int year){
+        return ResponseEntity.ok(repairVehicleService.countAllRepairsOfATypeFromAMonth(repair_type_id,month,year));
+
+    }
+
 
 
 }

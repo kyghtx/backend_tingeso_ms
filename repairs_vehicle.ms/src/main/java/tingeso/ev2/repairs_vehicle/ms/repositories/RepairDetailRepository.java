@@ -23,6 +23,17 @@ public interface RepairDetailRepository extends JpaRepository<RepairDetailEntity
     @Query("SELECT COUNT(rd) FROM RepairDetailEntity  rd WHERE rd.repair_type_id =:repair_type_id AND rd.patent =:patent " +
             "AND MONTH(rd.repair_date) = :month AND YEAR(rd.repair_date) = :year")
     Long sumAllRepairsOfATypOfAVehicle(@Param("repair_type_id") Long repair_type_id, @Param("patent") String patent,@Param("month") int month, @Param("year") int year);
+    @Query("SELECT COUNT(rd) FROM RepairDetailEntity  rd WHERE rd.repair_type_id =:repair_type_id")
+    Long sumAllRepairsOfAType(@Param("repair_type_id") Long repair_type_id);
+
+    //Query similar a la anterior, sin embargo, es necesario realizar la suma para un mes en especifico
+    @Query("SELECT SUM(rd.price) FROM RepairDetailEntity  rd WHERE rd.repair_type_id =:repair_type_id AND MONTH(rd.repair_date) = :month AND YEAR(rd.repair_date) =:year")
+    Long sumAllRepairsOfATypeAndAMonth(@Param("repair_type_id") Long repair_type_id, @Param("month") int month, int year);
+
+    @Query("SELECT COUNT(rd) FROM RepairDetailEntity  rd WHERE rd.repair_type_id =:repair_type_id " +
+            "AND MONTH(rd.repair_date) = :month AND YEAR(rd.repair_date) = :year")
+    Long countAllRepairsOfATypeOfAVehicleForAMonth(@Param("repair_type_id") Long repair_type_id,@Param("month") int month, int year);
+
 
 
 

@@ -20,4 +20,8 @@ public interface RepairDetailClient {
     Long getTotalMountOfARepairType(@PathVariable Long repair_type_id, @RequestParam int month, @RequestParam int year, @PathVariable String patent);
     @GetMapping("/repair_details/count/{repair_type_id}-{patent}")
     Long countAllRepairType(@PathVariable Long repair_type_id,@PathVariable String patent,@RequestParam int month, @RequestParam int year);
+    @GetMapping("/repair_details/sum/{repair_type_id}-{year}")
+    Long sumAllRepairTypeOnAMonth(@PathVariable Long repair_type_id, @RequestParam int month, @PathVariable int year);
+    @GetMapping("/repair_details/countRepairs/{repair_type_id}-{year}")
+    Long countAllRepairTypeOnAMonth(@PathVariable Long repair_type_id, @RequestParam int month, @PathVariable int year);
 }

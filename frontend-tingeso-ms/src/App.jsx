@@ -12,6 +12,7 @@ import CompletedRepairsVehicles from "./components/CompletedRepairsVehicle";
 import { useState } from "react";
 import ReportsMenu from "./components/ReportsMenu";
 import Report1 from "./components/Report1";
+import Report2 from "./components/Report2";
 function App() {
   return (
    
@@ -40,6 +41,8 @@ function App() {
           />
            <Route path="api/reports" element={<ReportsMenu/>}></Route>
            <Route path="api/reports/report_1" element={<Report1/>}></Route>
+           <Route path="api/reports/report_2" element={<Report2/>}></Route>
+        
         </Route>
        
       </Routes>

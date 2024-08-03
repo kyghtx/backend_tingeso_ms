@@ -91,8 +91,12 @@ function getReport1(month,year){
     const REPORT1_URL = `http://localhost:8080/api/reports/report_1?month=${month}&year=${year}`;
     return axios.get(REPORT1_URL);
 }
+function getReport2(month){
+    const REPORT2_URL = `http://localhost:8080/api/reports/report_2?month=${month}`;
+    return axios.get(REPORT2_URL);
+}
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,
     createVehicleType,getMotorTypes,createMotorType,createVehicle,
     getRepairList,createRepairType,getMotorTypesFromRepairListMs,
 getRepairPrices,createRepairPrices,getVehiclesFromRepairVehicles,getRepairListFromRepairVehicles,
-createRepairVehicles, getRepairsOfAVehicle,getRepairDetailsVehicle,updateRepairsState, getReport1}
+createRepairVehicles, getRepairsOfAVehicle,getRepairDetailsVehicle,updateRepairsState, getReport1 , getReport2}

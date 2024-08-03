@@ -9,6 +9,11 @@ function ReportsMenu() {
               Reporte 1
             </Link>
           </Button>
+          <Button className="nav-item">
+            <Link className="nav-link" to="/api/reports/report_2">
+              Reporte 2
+            </Link>
+          </Button>
         </nav>
      );
 }

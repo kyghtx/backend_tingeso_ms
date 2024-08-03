@@ -86,6 +86,7 @@ public class R2Service {
 
                 //set the total
                 r2Entity.setRepair_type_total_mount(totalMountOfRepairType);
+                r2Entity.setMonth_name(month.getMonth_name());
                 r2Entities.add(r2Entity);
 
                 /*add to te array*/

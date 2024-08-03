@@ -8,4 +8,5 @@ public class R2Entity {
     private int Month;
     private Long repair_total_quantity;
     private Long repair_type_total_mount;
+    private String month_name;
 }

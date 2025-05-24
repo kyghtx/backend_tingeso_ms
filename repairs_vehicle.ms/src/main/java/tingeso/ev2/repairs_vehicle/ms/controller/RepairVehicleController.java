@@ -64,7 +64,7 @@ public class RepairVehicleController {
     ResponseEntity<Long> SumAllRepairTypeOnAMonth(@PathVariable Long repair_type_id,@RequestParam int month,@PathVariable int year){
         return ResponseEntity.ok(repairVehicleService.SumAllRepairsOfATypeFromAMonth(repair_type_id,month,year));
     }
-    @GetMapping("/repair_details/{repair_type_id}")
+    @GetMapping("/repair_details/repair/{repair_type_id}")
     ResponseEntity<Long> getRepairTypeDetails(@PathVariable Long repair_type_id){
         return ResponseEntity.ok(repairVehicleService.sumAllRepairOfAType(repair_type_id));
     }

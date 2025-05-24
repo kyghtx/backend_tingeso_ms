@@ -48,9 +48,7 @@ function CompletedRepairsVehicles() {
     setSelectedRepair(params.row);
     setPopoverOpen(true); // Abrir el popover
   };
-  const handleClientRetire =(params) => {
-    
-  }
+
 
   // Función para añadir una reparación seleccionada a selectedRepairs
   const handleAddRepair = (selectedRepair) => {

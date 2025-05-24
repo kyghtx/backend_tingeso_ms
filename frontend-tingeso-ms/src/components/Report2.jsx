@@ -70,7 +70,7 @@ function Report2() {
 
   //Reverse de MonthsToShow
 
-  const MonthsToShowReverse= MonthsToShow.reverse();
+  const MonthsToShowReverse = MonthsToShow.reverse();
   //Armado de filas.
   const rows = [];
 
@@ -107,102 +107,95 @@ function Report2() {
       const total = MonthsToCalculate.find(
         (e) => m === e.month_name && e.repair_type_name === r.repair_type_name
       ).repair_type_total_mount;
-      console.log("Total de reparaciones para el mes: ",m, total);
-      emptyRow[m] = total ? total : 0; 
+      console.log("Total de reparaciones para el mes: ", m, total);
+      emptyRow[m] = total ? total : 0;
     });
 
     rows.push(emptyRow);
   });
-//Hasta este momento esta completo el asunto de poder mostrar la informacion de las entidades del reporte por pantalla.
-
-
- 
-
+  //Hasta este momento esta completo el asunto de poder mostrar la informacion de las entidades del reporte por pantalla.
 
   //Las columnas de momento solo poseen los nombres de los meses anteriores.
   const columns = [
     { field: "repair_type_name", headerName: "Tipo de Reparación", width: 350 },
     ...MonthsToShow.map((m, index) => [
       { id: index * 2 + 1, field: m, headerName: m, width: 150 },
-      { id: index * 2 + 2, field: `${m}-variation`, headerName: ` % Variación`, width: 150 }
-    ]).flat()
+      {
+        id: index * 2 + 2,
+        field: `${m}-variation`,
+        headerName: ` % Variación`,
+        width: 150,
+      },
+    ]).flat(),
   ];
   // Eliminar la última columna, ya que con lo anterior se genera una columna de mas en variaccion.
   const columnsWithoutLast = columns.slice(0, -1);
 
   //Ahora se requieren calcular las variaciones y el total.
-//Para ello creo una funcion que recorra cada fila para calcular las variaciones.
-// Calcula la variación para cada mes y tipo de reparación
-//El arreglo esta invertido... [mes actual, anterior, anterior del anterior]
+  //Para ello creo una funcion que recorra cada fila para calcular las variaciones.
+  // Calcula la variación para cada mes y tipo de reparación
+  //El arreglo esta invertido... [mes actual, anterior, anterior del anterior]
 
+  //TODO: revisar para colocar la variacion de los precios....
 
-//TODO: revisar para colocar la variacion de los precios....
-
-repairTypes.forEach((r) => {
-    const repairRow = rows.find((row) => row.id === `repair_${r.repair_type_id}`);
-    if (repairRow ) {
-        MonthsToShowReverse.forEach((m, index) => {
-            if (index>=0 && index<2) {
-              const currentValue = repairRow[m];
-              console.log("columna",m);
-              const previousValue = index >= 0 ? repairRow[MonthsToShowReverse[index + 1]] : 0;
-              console.log("Columna anterior:", MonthsToShowReverse[index + 1]);
-              console.log("Valor actual :", currentValue);
-              console.log("Valor anterior :", previousValue);
-              if (currentValue == 0) {
-                const variation = ((currentValue - previousValue) / previousValue) * 100;
-              repairRow[`${m}-variation`] = variation.toFixed(0) + '%';
-                
-              }
-              if (currentValue == 0 && previousValue == 0) {
-                const variation = 0;
-                repairRow[`${m}-variation`] = variation.toFixed(0) + '%';
-
-              }
-              if(currentValue != 0){
-                const variation = ((currentValue - previousValue) / currentValue) * 100;
-                repairRow[`${m}-variation`] = variation.toFixed(0) + '%';
-
-              
-            }
-              
-            }
-          
-          });
+  repairTypes.forEach((r) => {
+    const repairRow = rows.find(
+      (row) => row.id === `repair_${r.repair_type_id}`
+    );
+    if (repairRow) {
+      MonthsToShowReverse.forEach((m, index) => {
+        if (index >= 0 && index < 2) {
+          const currentValue = repairRow[m];
+          console.log("columna", m);
+          const previousValue =
+            index >= 0 ? repairRow[MonthsToShowReverse[index + 1]] : 0;
+          console.log("Columna anterior:", MonthsToShowReverse[index + 1]);
+          console.log("Valor actual :", currentValue);
+          console.log("Valor anterior :", previousValue);
+          if (currentValue == 0) {
+            const variation =
+              ((currentValue - previousValue) / previousValue) * 100;
+            repairRow[`${m}-variation`] = variation.toFixed(0) + "%";
+          }
+          if (currentValue == 0 && previousValue == 0) {
+            const variation = 0;
+            repairRow[`${m}-variation`] = variation.toFixed(0) + "%";
+          }
+          if (currentValue != 0) {
+            const variation =
+              ((currentValue - previousValue) / currentValue) * 100;
+            repairRow[`${m}-variation`] = variation.toFixed(0) + "%";
+          }
+        }
+      });
     }
     const emptyRow = rows.find((row) => row.id === `empty_${r.repair_type_id}`);
 
-    MonthsToShowReverse.forEach((m,index)=>{
-        if (index>=0 && index<2) {
-            const currentValue = emptyRow[m];
-            console.log("columna",m);
-            const previousValue = index >= 0 ? emptyRow[MonthsToShowReverse[index + 1]] : 0;
-            console.log("Columna anterior:", MonthsToShowReverse[index + 1]);
-            console.log("Valor actual :", currentValue);
-            console.log("Valor anterior :", previousValue);
-            if (currentValue == 0) {
-              const variation = ((currentValue - previousValue) / previousValue) * 100;
-            emptyRow[`${m}-variation`] = variation.toFixed(0) + '%';
-              
-            }
-            if (currentValue == 0 && previousValue == 0) {
-              const variation = 0;
-              emptyRow[`${m}-variation`] = variation.toFixed(0) + '%';
-
-            }
-            if(currentValue != 0){
-              const variation = ((currentValue - previousValue) / currentValue) * 100;
-              emptyRow[`${m}-variation`] = variation.toFixed(0) + '%';
-
-            
-          }
-            
-          }
-        
-        
-            
-
-    })
+    MonthsToShowReverse.forEach((m, index) => {
+      if (index >= 0 && index < 2) {
+        const currentValue = emptyRow[m];
+        console.log("columna", m);
+        const previousValue =
+          index >= 0 ? emptyRow[MonthsToShowReverse[index + 1]] : 0;
+        console.log("Columna anterior:", MonthsToShowReverse[index + 1]);
+        console.log("Valor actual :", currentValue);
+        console.log("Valor anterior :", previousValue);
+        if (currentValue == 0) {
+          const variation =
+            ((currentValue - previousValue) / previousValue) * 100;
+          emptyRow[`${m}-variation`] = variation.toFixed(0) + "%";
+        }
+        if (currentValue == 0 && previousValue == 0) {
+          const variation = 0;
+          emptyRow[`${m}-variation`] = variation.toFixed(0) + "%";
+        }
+        if (currentValue != 0) {
+          const variation =
+            ((currentValue - previousValue) / currentValue) * 100;
+          emptyRow[`${m}-variation`] = variation.toFixed(0) + "%";
+        }
+      }
+    });
   });
   return (
     <Box

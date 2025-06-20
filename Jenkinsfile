@@ -46,16 +46,7 @@ pipeline {
             }
 
         }
-        stage("Build repairs-list.ms"){
-            steps{
-                dir('repairs-list.ms'){
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/repairs-list-ms .'
-            }
-        
-            }
-
-        }
+       
         stage("Build repairs-vehicle.ms"){
             steps{
                 dir('repairs-vehicle.ms'){
@@ -71,6 +62,16 @@ pipeline {
                     bat 'docker build -t kyghtx/reports_uh-ms .'
                 }
             }
+        }
+         stage("Build repairs-list.ms"){
+            steps{
+                dir('repairs-list.ms'){
+                    bat "mvn clean install -DskipTests"
+                    bat 'docker build -t kyghtx/repairs-list-ms .'
+            }
+        
+            }
+
         }
 
         stage('Push Docker Image') {

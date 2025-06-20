@@ -51,7 +51,7 @@ pipeline {
             steps{
                 dir('repairs-vehicle.ms'){
                     
-                    bat "mvn clean install -DskipTests"
+                   bat "mvn -f repairs-vehicle.ms/pom.xml clean install -DskipTests"
                     bat 'docker build -t kyghtx/repairs-vehicle-ms .'
                 }
             }

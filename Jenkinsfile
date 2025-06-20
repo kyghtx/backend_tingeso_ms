@@ -66,6 +66,7 @@ pipeline {
          stage("Build repairs-list.ms"){
             steps{
                 dir('repairs-list.ms'){
+                    bat "mvn -f /pom.xml"
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/repairs-list-ms .'
             }

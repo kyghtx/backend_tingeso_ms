@@ -10,7 +10,6 @@ pipeline {
             steps {
                 
                 git 'https://github.com/kyghtx/backend_tingeso_ms'
-                bat "mvn clean install"
             }
         }
 

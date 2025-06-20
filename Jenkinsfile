@@ -17,7 +17,7 @@ pipeline {
             steps {
                 dir('vehicle.ms') {
                     bat "mvn clean install"
-                    bat 'docker build -t kyghtx/deploy_decsecops .'
+                    bat 'docker build -t kyghtx/vehicle-ms .'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'dckhubpassword', variable: 'dockerpass')]) {
                     bat "docker login -u kyghtx -p ${dockerpass}"
-                    bat "docker push kyghtx/deploy_decsecops/"
+                    bat "docker push kyghtx/deploy_devsecops"
                 }
             }
         }

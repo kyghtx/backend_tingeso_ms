@@ -52,6 +52,8 @@ pipeline {
                     bat "mvn clean install"
                     bat 'docker build -t kyghtx/repairs-list-ms .'
             }
+        
+            }
 
         }
         stage("Build repairs-vehicle.ms"){

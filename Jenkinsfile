@@ -16,6 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('vehicle.ms') {
+                    bat "mvn clean install"
                     bat 'docker build -t kyghtx/deploy_decsecops .'
                 }
             }

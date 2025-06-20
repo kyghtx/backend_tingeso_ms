@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'dckhubpassword', variable: 'dockerpass')]) {
                     bat "docker login -u kyghtx -p ${dockerpass}"
-                    bat "docker push kyghtx/deploy_decsecops"
+                    bat "docker push kyghtx/deploy_decsecops/"
                 }
             }
         }

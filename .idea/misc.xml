@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/vehicle.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/reports_uh.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/repairs_list.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/repairs_vehicle.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-service/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway-service/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
+        <option value="$PROJECT_DIR$/repairs-vehicle.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/repairs-list.ms/pom.xml" />
+        <option value="$PROJECT_DIR$/reports-uh.ms/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

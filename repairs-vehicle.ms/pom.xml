@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tingeso.ev2</groupId>
-	<artifactId>repairs_vehicle.ms</artifactId>
+	<artifactId>ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>repairs_vehicle.ms</name>
 	<description>Demo project for Spring Boot</description>

@@ -50,6 +50,7 @@ pipeline {
         stage("Build repairs-vehicle.ms"){
             steps{
                 dir('repairs-vehicle.ms'){
+                    bat "mvn -f /pom.xml"
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/repairs-vehicle-ms .'
                 }
@@ -58,6 +59,7 @@ pipeline {
         stage("Build reports_uh.ms"){
             steps{
                 dir('reports-uh.ms'){
+                    bat "mvn -f /pom.xml"
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/reports_uh-ms .'
                 }

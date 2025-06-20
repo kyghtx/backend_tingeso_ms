@@ -48,7 +48,7 @@ pipeline {
         }
         stage("Build repairs-list.ms"){
             steps{
-                dir('repairs_list.ms'){
+                dir('repairs-list.ms'){
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/repairs-list-ms .'
             }
@@ -58,7 +58,7 @@ pipeline {
         }
         stage("Build repairs-vehicle.ms"){
             steps{
-                dir('repairs_vehicle.ms'){
+                dir('repairs-vehicle.ms'){
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/repairs-vehicle-ms .'
                 }
@@ -66,7 +66,7 @@ pipeline {
         }
         stage("Build reports_uh.ms"){
             steps{
-                dir('reports_uh.ms'){
+                dir('reports-uh.ms'){
                     bat "mvn clean install -DskipTests"
                     bat 'docker build -t kyghtx/reports_uh-ms .'
                 }

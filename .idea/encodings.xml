@@ -6,9 +6,9 @@
     <file url="file://$PROJECT_DIR$/eureka-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/repairs_list.ms/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/repairs_vehicle.ms/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/reports_uh.ms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/repairs-list.ms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/repairs-vehicle.ms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reports-uh.ms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vehicle.ms/src/main/java" charset="UTF-8" />
   </component>
 </project>

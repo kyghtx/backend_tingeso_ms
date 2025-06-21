@@ -1,7 +1,165 @@
 version: '3.8'
 
 services:
-  vehicles-ms:
-    build: ./vehicles.ms
+  config-server:
+    image: kyghtx/config-server-ms
+    build:
+      context: ./config-server.ms
     ports:
-      -
+      - "8888:8888"
+    networks:
+      - spring-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  eureka-server:
+    image: kyghtx/eureka-server-ms
+    build:
+      context: ./eureka-server
+    ports:
+      - "8761:8761"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - spring-net
+
+  gateway:
+    image: kyghtx/gateway-server-ms
+    build:
+      context: ./gateway-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+    networks:
+      - spring-net
+
+  vehicle-db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: vehicles_MS
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - vehicle-data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+  vehicle:
+    image: kyghtx/vehicle-ms
+    build:
+      context: ./vehicle.ms
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://vehicle-db:5432/vehicles_MS
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+    depends_on:
+      - vehicle-db
+      - eureka-server
+    networks:
+      - spring-net
+
+  repairs-list-db:
+    image: postgres:15
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: repairs_list_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - repairs-list-data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+  repairs-list:
+    image: kyghtx/repairs-list-ms
+    build:
+      context: ./repairs-list.ms
+    ports:
+      - "8091:8091"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-list-db:5432/repairs_list_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+    depends_on:
+      - repairs-list-db
+      - eureka-server
+    networks:
+      - spring-net
+
+  repairs-vehicle-db:
+    image: postgres:15
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: repairs_vehicle_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - repairs-vehicle-data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+  repairs-vehicle:
+    image: kyghtx/repairs-vehicle-ms
+    build:
+      context: ./repairs-vehicle.ms
+    ports:
+      - "8092:8092"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-vehicle-db:5432/repairs_vehicle_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+    depends_on:
+      - repairs-vehicle-db
+      - eureka-server
+    networks:
+      - spring-net
+
+  reports-uh-db:
+    image: postgres:15
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: reports_uh_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - reports-uh-data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+  reports-uh:
+    image: kyghtx/reports_uh-ms
+    build:
+      context: ./reports-uh.ms
+    ports:
+      - "8093:8093"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://reports-uh-db:5432/reports_uh_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123456
+    depends_on:
+      - reports-uh-db
+      - eureka-server
+    networks:
+      - spring-net
+
+volumes:
+  vehicle-data:
+  repairs-list-data:
+  repairs-vehicle-data:
+  reports-uh-data:
+
+networks:
+  spring-net:

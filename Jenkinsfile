@@ -93,5 +93,14 @@ pipeline {
                 }
             }
         }
+        stage('Deploy with Docker Compose') {
+    steps {
+            bat 'docker-compose down || exit 0' // Detiene cualquier despliegue previo
+            bat 'docker-compose pull'           // Opcional: actualiza imágenes desde Docker Hub
+            bat 'docker-compose up -d --remove-orphans' // Inicia en segundo plano
+        
+    }
+}
+
     }
 }

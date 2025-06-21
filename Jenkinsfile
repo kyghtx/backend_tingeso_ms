@@ -8,8 +8,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                cleanWs()
-                git 'https://github.com/kyghtx/backend_tingeso_ms'
+                deleteDir() // 🔥 Elimina completamente el workspace
+                git url: 'https://github.com/kyghtx/backend_tingeso_ms',
+                branch: 'main',
+                changelog: false,
+                poll: false
             }
         }
 

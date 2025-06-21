@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                
+                cleanWS()
                 git 'https://github.com/kyghtx/backend_tingeso_ms'
             }
         }

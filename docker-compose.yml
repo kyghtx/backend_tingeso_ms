@@ -21,15 +21,15 @@ services:
       context: ./eureka-server
     ports:
       - "8761:8761"
+    networks:
+      - spring-net
     depends_on:
       config-server:
         condition: service_healthy
-    networks:
-      - spring-net
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 30s
-      timeout: 10s
+      interval: 10s
+      timeout: 5s
       retries: 5
 
   gateway:
@@ -38,11 +38,13 @@ services:
       context: ./gateway-server
     ports:
       - "8080:8080"
+    networks:
+      - spring-net
     depends_on:
       eureka-server:
         condition: service_healthy
-    networks:
-      - spring-net
+      config-server:
+        condition: service_healthy
 
   vehicle-db:
     image: postgres:15
@@ -67,11 +69,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://vehicle-db:5432/vehicles_MS
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123456
-    depends_on:
-      - vehicle-db
-      - eureka-server
     networks:
       - spring-net
+    depends_on:
+      vehicle-db:
+        condition: service_started
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
 
   repairs-list-db:
     image: postgres:15
@@ -96,11 +102,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-list-db:5432/repairs_list_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123456
-    depends_on:
-      - repairs-list-db
-      - eureka-server
     networks:
       - spring-net
+    depends_on:
+      repairs-list-db:
+        condition: service_started
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
 
   repairs-vehicle-db:
     image: postgres:15
@@ -125,11 +135,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-vehicle-db:5432/repairs_vehicle_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123456
-    depends_on:
-      - repairs-vehicle-db
-      - eureka-server
     networks:
       - spring-net
+    depends_on:
+      repairs-vehicle-db:
+        condition: service_started
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
 
   reports-uh-db:
     image: postgres:15
@@ -154,11 +168,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://reports-uh-db:5432/reports_uh_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123456
-    depends_on:
-      - reports-uh-db
-      - eureka-server
     networks:
       - spring-net
+    depends_on:
+      reports-uh-db:
+        condition: service_started
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
 
 volumes:
   vehicle-data:

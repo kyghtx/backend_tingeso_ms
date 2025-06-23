@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                deleteDir() // 🔥 Elimina completamente el workspace
+                cleanWs() 
                 git url: 'https://github.com/kyghtx/backend_tingeso_ms',
                 branch: 'main',
                 changelog: false,
@@ -97,7 +97,7 @@ pipeline {
     steps {
             bat 'docker-compose down || exit 0' // Detiene cualquier despliegue previo
             bat 'docker-compose pull'           // Opcional: actualiza imágenes desde Docker Hub
-            bat 'docker-compose up --build' // Inicia en segundo plano
+            bat 'docker-compose up -d --build --remove-orphans' // Inicia en segundo plano
         
     }
 }

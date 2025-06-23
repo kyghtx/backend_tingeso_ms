@@ -50,7 +50,6 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: gateway
-      SPRING_PROFILES_ACTIVE: dev
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
 
   vehicle-db:
@@ -74,7 +73,6 @@ services:
       - "8090:8090"
     environment:
       SPRING_APPLICATION_NAME: vehicle
-      SPRING_PROFILES_ACTIVE: dev
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://vehicle-db:5432/vehicles_MS
       SPRING_DATASOURCE_USERNAME: postgres
@@ -87,6 +85,8 @@ services:
       eureka-server:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
   repairs-list-db:
@@ -110,7 +110,6 @@ services:
       - "8091:8091"
     environment:
       SPRING_APPLICATION_NAME: repairs-list
-      SPRING_PROFILES_ACTIVE: dev
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-list-db:5432/repairs_list_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -123,6 +122,8 @@ services:
       eureka-server:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
   repairs-vehicle-db:
@@ -146,7 +147,6 @@ services:
       - "8092:8092"
     environment:
       SPRING_APPLICATION_NAME: repairs-vehicle
-      SPRING_PROFILES_ACTIVE: dev
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-vehicle-db:5432/repairs_vehicle_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -159,6 +159,8 @@ services:
       eureka-server:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
   reports-uh-db:
@@ -182,7 +184,6 @@ services:
       - "8093:8093"
     environment:
       SPRING_APPLICATION_NAME: reports-uh
-      SPRING_PROFILES_ACTIVE: dev
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://reports-uh-db:5432/reports_uh_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -195,6 +196,8 @@ services:
       eureka-server:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      gateway:
         condition: service_healthy
 
 volumes:

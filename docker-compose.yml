@@ -34,6 +34,8 @@ services:
     environment:
       SPRING_APPLICATION_NAME: eureka-server
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+
 
   gateway:
     image: kyghtx/gateway-server-ms
@@ -86,8 +88,7 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-      gateway:
-        condition: service_healthy
+
 
   repairs-list-db:
     image: postgres:15
@@ -123,8 +124,7 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-      gateway:
-        condition: service_healthy
+
 
   repairs-vehicle-db:
     image: postgres:15
@@ -160,8 +160,7 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-      gateway:
-        condition: service_healthy
+
 
   reports-uh-db:
     image: postgres:15
@@ -196,8 +195,6 @@ services:
       eureka-server:
         condition: service_healthy
       config-server:
-        condition: service_healthy
-      gateway:
         condition: service_healthy
 
 volumes:

@@ -15,6 +15,14 @@ pipeline {
                 poll: false
             }
         }
+         stage('Build frontend') {
+            steps {
+                dir('frontend-tingeso-ms') {
+                    bat 'npm install'
+                    bat 'npm run build'
+                    bat 'docker build -t kyghtx/frontend-app .'
+        }
+    }
 
         stage('Build vehicle-ms Docker Image') {
             steps {
@@ -78,14 +86,7 @@ pipeline {
             }
 
         }
-        stage('Deploy frontend') {
-            steps {
-                dir('frontend-tingeso-ms') {
-                    bat 'npm install'
-                    bat 'npm run build'
-                    bat 'docker build -t kyghtx/frontend-app .'
-        }
-    }
+       
 }
 
 

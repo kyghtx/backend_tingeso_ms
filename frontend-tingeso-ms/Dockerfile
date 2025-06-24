@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copiar el build generado desde la etapa anterior a la carpeta pública de NGINX
-COPY --from=builder /dist/build /usr/share/nginx/html
+COPY --from=builder /dist /usr/share/nginx/html
 
 # Exponer el puerto por donde NGINX sirve la app
 EXPOSE 80

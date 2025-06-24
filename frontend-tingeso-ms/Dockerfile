@@ -1,5 +1,5 @@
 # Etapa 1: Build del frontend
-FROM node:17-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Crear carpeta de trabajo dentro del contenedor
 WORKDIR /app

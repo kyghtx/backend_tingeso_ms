@@ -78,7 +78,7 @@ pipeline {
             }
 
         }
-        stage('Deploy with Docker Compose') {
+        stage('Deploy frontend') {
             steps {
                 dir('frontend-tingeso') {
                     bat 'npm install'

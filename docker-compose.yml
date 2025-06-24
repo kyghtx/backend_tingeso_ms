@@ -75,7 +75,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      SPRING_APPLICATION_NAME: vehicle.ms
+      SPRING_APPLICATION_NAME: vehicles.ms
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://vehicle-db:5432/vehicles_MS
       SPRING_DATASOURCE_USERNAME: postgres

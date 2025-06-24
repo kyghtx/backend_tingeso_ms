@@ -78,6 +78,16 @@ pipeline {
             }
 
         }
+        stage('Deploy with Docker Compose') {
+            steps {
+                dir('frontend-tingeso') {
+                    bat 'npm install'
+                    bat 'npm run build'
+                    bat 'docker build -t kyghtx/frontend-app .'
+        }
+    }
+}
+
 
         stage('Push Docker Image') {
             steps {
@@ -90,6 +100,7 @@ pipeline {
                     bat "docker push kyghtx/repairs-list-ms"
                     bat "docker push kyghtx/repairs-vehicle-ms"
                     bat "docker push kyghtx/reports_uh-ms"
+                    bat "docker push kyghtx/frontend-app"
                 }
             }
         }

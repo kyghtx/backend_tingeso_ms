@@ -198,6 +198,22 @@ services:
       config-server:
         condition: service_healthy
 
+  frontend:
+    image: kyghtx/frontend-app
+    build:
+      context: ./frontend-tingeso
+    ports:
+       - "3000:3000"
+    networks:
+    - spring-net
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+
+    
+    
 volumes:
   vehicle-data:
   repairs-list-data:

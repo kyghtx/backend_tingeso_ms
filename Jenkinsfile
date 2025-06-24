@@ -23,6 +23,7 @@ pipeline {
                     bat 'docker build -t kyghtx/frontend-app .'
         }
     }
+    }
 
         stage('Build vehicle-ms Docker Image') {
             steps {

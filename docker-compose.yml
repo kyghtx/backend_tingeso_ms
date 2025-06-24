@@ -201,7 +201,7 @@ services:
   frontend:
     image: kyghtx/frontend-app
     build:
-      context: ./frontend-tingeso
+      context: ./frontend-tingeso-ms
     ports:
        - "3000:3000"
     networks:

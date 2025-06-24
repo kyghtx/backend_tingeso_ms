@@ -52,7 +52,7 @@ services:
       config-server:
         condition: service_healthy
     environment:
-      SPRING_APPLICATION_NAME: gateway
+      SPRING_APPLICATION_NAME: gateway-server
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
 
   vehicle-db:
@@ -75,7 +75,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      SPRING_APPLICATION_NAME: vehicle
+      SPRING_APPLICATION_NAME: vehicle.ms
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://vehicle-db:5432/vehicles_MS
       SPRING_DATASOURCE_USERNAME: postgres
@@ -111,7 +111,7 @@ services:
     ports:
       - "8091:8091"
     environment:
-      SPRING_APPLICATION_NAME: repairs-list
+      SPRING_APPLICATION_NAME: repairs-list.ms
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-list-db:5432/repairs_list_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -147,7 +147,7 @@ services:
     ports:
       - "8092:8092"
     environment:
-      SPRING_APPLICATION_NAME: repairs-vehicle
+      SPRING_APPLICATION_NAME: repairs-vehicle.ms
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://repairs-vehicle-db:5432/repairs_vehicle_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -183,7 +183,7 @@ services:
     ports:
       - "8093:8093"
     environment:
-      SPRING_APPLICATION_NAME: reports-uh
+      SPRING_APPLICATION_NAME: reports-uh.ms
       SPRING_CLOUD_CONFIG_URI: http://config-server:8888
       SPRING_DATASOURCE_URL: jdbc:postgresql://reports-uh-db:5432/reports_uh_db
       SPRING_DATASOURCE_USERNAME: postgres

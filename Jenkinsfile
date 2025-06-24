@@ -80,7 +80,7 @@ pipeline {
         }
         stage('Deploy frontend') {
             steps {
-                dir('frontend-tingeso') {
+                dir('frontend-tingeso-ms') {
                     bat 'npm install'
                     bat 'npm run build'
                     bat 'docker build -t kyghtx/frontend-app .'

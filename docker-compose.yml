@@ -203,9 +203,9 @@ services:
     build:
       context: ./frontend-tingeso-ms
     ports:
-       - "3000:3000"
+      - "3000:3000"
     networks:
-    - spring-net
+      - spring-net
     depends_on:
       eureka-server:
         condition: service_healthy

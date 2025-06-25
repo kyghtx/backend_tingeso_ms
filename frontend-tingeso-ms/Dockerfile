@@ -21,7 +21,7 @@ FROM nginx:alpine
 
 # Copiar el build generado desde la etapa anterior a la carpeta pública de NGINX
 COPY --from=builder app/dist /usr/share/nginx/html
-
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Exponer el puerto por donde NGINX sirve la app
 EXPOSE 80
 

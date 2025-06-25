@@ -4,7 +4,7 @@ const GATEWAY_URL= "gateway:8080";
 const VEHICLES_API_URL = `http://${GATEWAY_URL}/api/vehicles`;
 const BRAND_API_URL= `http://${GATEWAY_URL}/api/vehicles/brands`
 const VEHICLE_TYPES_API_URL=`http://${GATEWAY_URL}/api/vehicles/types`
-const VEHICLE_MOTORS_API_URL=`"http://${GATEWAY_URL}/api/vehicles/motor_types"`
+const VEHICLE_MOTORS_API_URL=`http://${GATEWAY_URL}/api/vehicles/motor_types`
 //lo siguiente queda a revision por tema de configuracion con el Gateway!!
 const REPAIRS_LIST_API_URL=`http://${GATEWAY_URL}/api/repairs_types`
 const REPAIRS_LIST_MOTOR_TYPES=`http://${GATEWAY_URL}/api/repairs_types/repairs_prices/motor_types`

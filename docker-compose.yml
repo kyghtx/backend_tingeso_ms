@@ -203,7 +203,7 @@ services:
     build:
       context: ./frontend-tingeso-ms
     ports:
-      - "3000:3000"
+      - "3000:80"
     networks:
       - spring-net
     depends_on:

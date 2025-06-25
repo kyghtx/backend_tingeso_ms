@@ -1,5 +1,5 @@
 import axios from "axios";
-const GATEWAY_URL= "http://gateway:8080";
+const GATEWAY_URL= "gateway:8080";
 
 const VEHICLES_API_URL = `http://${GATEWAY_URL}/api/vehicles`;
 const BRAND_API_URL= `http://${GATEWAY_URL}/api/vehicles/brands`
@@ -76,12 +76,12 @@ function createRepairVehicles(repairsVehicles){
     return axios.post(REPAIRS_VEHICLES,repairsVehicles);
 }
 function getRepairsOfAVehicle(vehicle_id){
-    const REPAIRS_VEHICLE=`http://localhost:8080/api/repairs_vehicles/${vehicle_id}`;
+    const REPAIRS_VEHICLE=`http://${GATEWAY_URL}/api/repairs_vehicles/${vehicle_id}`;
 
     return axios.get(REPAIRS_VEHICLE);
 }
 function getRepairDetailsVehicle(vehicle_id){
-    const REPAIRS_DETAILS=`http://localhost:8080/api/repairs_vehicles/repair_details/${vehicle_id}`
+    const REPAIRS_DETAILS=`http://${GATEWAY_URL}/api/repairs_vehicles/repair_details/${vehicle_id}`
     
     return axios.get(REPAIRS_DETAILS);
 }
@@ -90,11 +90,11 @@ function updateRepairsState(repairs){
 }
 /*get method for report 1*/
 function getReport1(month,year){
-    const REPORT1_URL = `http://localhost:8080/api/reports/report_1?month=${month}&year=${year}`;
+    const REPORT1_URL = `http://${GATEWAY_URL}/api/reports/report_1?month=${month}&year=${year}`;
     return axios.get(REPORT1_URL);
 }
 function getReport2(month){
-    const REPORT2_URL = `http://localhost:8080/api/reports/report_2?month=${month}`;
+    const REPORT2_URL = `http://${GATEWAY_URL}/api/reports/report_2?month=${month}`;
     return axios.get(REPORT2_URL);
 }
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,

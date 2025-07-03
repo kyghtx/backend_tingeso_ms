@@ -1,5 +1,5 @@
 import axios from "axios";
-const GATEWAY_URL= "localhost";
+const GATEWAY_URL= "api";
 
 const VEHICLES_API_URL = `http://${GATEWAY_URL}/api/vehicles`;
 const BRAND_API_URL= `http://${GATEWAY_URL}/api/vehicles/brands`

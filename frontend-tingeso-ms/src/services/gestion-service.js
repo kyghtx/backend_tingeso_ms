@@ -1,17 +1,19 @@
 import axios from "axios";
-const GATEWAY_URL= "/api";
+const GATEWAY_PREFIX= "/api";
 
-const VEHICLES_API_URL = `http://${GATEWAY_URL}/api/vehicles`;
-const BRAND_API_URL= `http://${GATEWAY_URL}/api/vehicles/brands`
-const VEHICLE_TYPES_API_URL=`http://${GATEWAY_URL}/api/vehicles/types`
-const VEHICLE_MOTORS_API_URL=`http://${GATEWAY_URL}/api/vehicles/motor_types`
-//lo siguiente queda a revision por tema de configuracion con el Gateway!!
-const REPAIRS_LIST_API_URL=`http://${GATEWAY_URL}/api/repairs_types`
-const REPAIRS_LIST_MOTOR_TYPES=`http://${GATEWAY_URL}/api/repairs_types/repairs_prices/motor_types`
-const REPAIRS_PRICES_LIST =`http://${GATEWAY_URL}/api/repairs_types/repairs_prices`
-const VEHICLES_FROM_REPAIR=`http://${GATEWAY_URL}/api/repairs_vehicles/vehicles`
-const RL_FROM_REPAIR_VEHICLES=`http://${GATEWAY_URL}/api/repairs_vehicles/repair_types`
-const REPAIRS_VEHICLES=`http://${GATEWAY_URL}/api/repairs_vehicles`
+const VEHICLES_API_URL = `${GATEWAY_PREFIX}/api/vehicles`;
+const BRAND_API_URL = `${GATEWAY_PREFIX}/api/vehicles/brands`;
+const VEHICLE_TYPES_API_URL = `${GATEWAY_PREFIX}/api/vehicles/types`;
+const VEHICLE_MOTORS_API_URL = `${GATEWAY_PREFIX}/api/vehicles/motor_types`;
+
+const REPAIRS_LIST_API_URL = `${GATEWAY_PREFIX}/api/repairs_types`;
+const REPAIRS_LIST_MOTOR_TYPES = `${GATEWAY_PREFIX}/api/repairs_types/repairs_prices/motor_types`;
+const REPAIRS_PRICES_LIST = `${GATEWAY_PREFIX}/api/repairs_types/repairs_prices`;
+const VEHICLES_FROM_REPAIR = `${GATEWAY_PREFIX}/api/repairs_vehicles/vehicles`;
+const RL_FROM_REPAIR_VEHICLES = `${GATEWAY_PREFIX}/api/repairs_vehicles/repair_types`;
+const REPAIRS_VEHICLES = `${GATEWAY_PREFIX}/api/repairs_vehicles`;
+
+
 /*referente a la gestion de vehiculos*/
 function createVehicle(vehicle){
     return axios.post(VEHICLES_API_URL,vehicle);
@@ -76,12 +78,12 @@ function createRepairVehicles(repairsVehicles){
     return axios.post(REPAIRS_VEHICLES,repairsVehicles);
 }
 function getRepairsOfAVehicle(vehicle_id){
-    const REPAIRS_VEHICLE=`http://${GATEWAY_URL}/api/repairs_vehicles/${vehicle_id}`;
+    const REPAIRS_VEHICLE=`${GATEWAY_PREFIX}/api/repairs_vehicles/${vehicle_id}`;
 
     return axios.get(REPAIRS_VEHICLE);
 }
 function getRepairDetailsVehicle(vehicle_id){
-    const REPAIRS_DETAILS=`http://${GATEWAY_URL}/api/repairs_vehicles/repair_details/${vehicle_id}`
+    const REPAIRS_DETAILS=`${GATEWAY_PREFIX}/api/repairs_vehicles/repair_details/${vehicle_id}`
     
     return axios.get(REPAIRS_DETAILS);
 }
@@ -90,11 +92,11 @@ function updateRepairsState(repairs){
 }
 /*get method for report 1*/
 function getReport1(month,year){
-    const REPORT1_URL = `http://${GATEWAY_URL}/api/reports/report_1?month=${month}&year=${year}`;
+    const REPORT1_URL = `${GATEWAY_PREFIX}/api/reports/report_1?month=${month}&year=${year}`;
     return axios.get(REPORT1_URL);
 }
 function getReport2(month){
-    const REPORT2_URL = `http://${GATEWAY_URL}/api/reports/report_2?month=${month}`;
+    const REPORT2_URL = `${GATEWAY_PREFIX}/api/reports/report_2?month=${month}`;
     return axios.get(REPORT2_URL);
 }
 export default {getVehicles,createBrand,getBrands,getVehicleTypes,

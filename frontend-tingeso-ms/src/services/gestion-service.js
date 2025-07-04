@@ -1,5 +1,5 @@
 import axios from "axios";
-const GATEWAY_PREFIX= "http://gateway:8080";
+const GATEWAY_PREFIX= "http://localhost:8080";
 
 const VEHICLES_API_URL = `${GATEWAY_PREFIX}/api/vehicles`;
 const BRAND_API_URL = `${GATEWAY_PREFIX}/api/vehicles/brands`;

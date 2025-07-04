@@ -19,24 +19,24 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/api/vehicles" element={<CreateVehicle />} />
-          <Route path="/api/vehicles/Brands" element={<CreateBrand />} />
-          <Route path="/api/vehicles/Types" element={<CreateVehicleType />} />
+          <Route path="/vehicles" element={<CreateVehicle />} />
+          <Route path="/vehicles/Brands" element={<CreateBrand />} />
+          <Route path="/vehicles/Types" element={<CreateVehicleType />} />
           <Route
-            path="/api/vehicles/MotorTypes"
+            path="/vehicles/MotorTypes"
             element={<CreateMotorType />}
           />
-          <Route path="/api/repairs_types" element={<CreateRepairType />} />
+          <Route path="/repairs_types" element={<CreateRepairType />} />
           <Route
-            path="/api/repairs_types/repairs_prices"
+            path="/repairs_types/repairs_prices"
             element={<CreateRepairPrices />}
           />
           <Route
-            path="/api/repair_vehicles/create"
+            path="/repair_vehicles/create"
             element={<CreateRepairVehicle />}
           />
           <Route
-            path="/api/repair_vehicles/:vehicle_id"
+            path="/repair_vehicles/:vehicle_id"
             element={<CompletedRepairsVehicles/>}
           />
            <Route path="api/reports" element={<ReportsMenu/>}></Route>

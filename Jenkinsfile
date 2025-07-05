@@ -26,65 +26,59 @@ pipeline {
             }
         }
 
-        stage('Build vehicle-ms Docker Image') {
+        stage("SonarQube Analysis") {
+            environment {
+                SONAR_HOST_URL = 'http://localhost:9000'
+                SONAR_AUTH_TOKEN = credentials('sonarqubepass')
+            }
             steps {
-                dir('vehicle.ms') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/vehicle-ms .'
+                script {
+                    def services = [
+                        [dir: 'vehicle.ms', key: 'vehicle-ms'],
+                        [dir: 'config-server.ms', key: 'config-server-ms'],
+                        [dir: 'eureka-server', key: 'eureka-server-ms'],
+                        [dir: 'gateway-server', key: 'gateway-server-ms'],
+                        [dir: 'repairs-list.ms', key: 'repairs-list-ms'],
+                        [dir: 'repairs-vehicle.ms', key: 'repairs-vehicle-ms'],
+                        [dir: 'reports-uh.ms', key: 'reports_uh-ms']
+                    ]
+
+                    for (service in services) {
+                        dir(service.dir) {
+                            bat "mvn clean install -DskipTests"
+                            bat "mvn sonar:sonar -Dsonar.projectKey=${service.key} -Dsonar.java.binaries=target/classes -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
+                        }
+                    }
                 }
             }
         }
 
-        stage("Build config-server.ms Docker Image") {
+        stage("Build Docker Images") {
             steps {
-                dir('config-server.ms') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/config-server-ms .'
+                script {
+                    def services = [
+                        [dir: 'vehicle.ms', image: 'kyghtx/vehicle-ms'],
+                        [dir: 'config-server.ms', image: 'kyghtx/config-server-ms'],
+                        [dir: 'eureka-server', image: 'kyghtx/eureka-server-ms'],
+                        [dir: 'gateway-server', image: 'kyghtx/gateway-server-ms'],
+                        [dir: 'repairs-list.ms', image: 'kyghtx/repairs-list-ms'],
+                        [dir: 'repairs-vehicle.ms', image: 'kyghtx/repairs-vehicle-ms'],
+                        [dir: 'reports-uh.ms', image: 'kyghtx/reports_uh-ms']
+                    ]
+
+                    for (service in services) {
+                        dir(service.dir) {
+                            bat "docker build -t ${service.image} ."
+                        }
+                    }
                 }
             }
         }
 
-        stage("Build eureka-server.ms Docker Image") {
+        stage('Build frontend Docker Image') {
             steps {
-                dir('eureka-server') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/eureka-server-ms .'
-                }
-            }
-        }
-
-        stage("Build gateway-server.ms Docker Image") {
-            steps {
-                dir('gateway-server') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/gateway-server-ms .'
-                }
-            }
-        }
-
-        stage("Build repairs-vehicle.ms Docker Image") {
-            steps {
-                dir('repairs-vehicle.ms') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/repairs-vehicle-ms .'
-                }
-            }
-        }
-
-        stage("Build reports_uh.ms Docker Image") {
-            steps {
-                dir('reports-uh.ms') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/reports_uh-ms .'
-                }
-            }
-        }
-
-        stage("Build repairs-list.ms Docker Image") {
-            steps {
-                dir('repairs-list.ms') {
-                    bat "mvn clean install -DskipTests"
-                    bat 'docker build -t kyghtx/repairs-list-ms .'
+                dir('frontend-tingeso-ms') {
+                    bat 'docker build -t kyghtx/frontend-app .'
                 }
             }
         }
@@ -110,32 +104,6 @@ pipeline {
                 bat 'docker-compose down || exit 0'
                 bat 'docker-compose pull'
                 bat 'docker-compose up -d --build --remove-orphans'
-            }
-        }
-
-        stage("SonarQube Analysis") {
-            environment {
-                SONAR_HOST_URL = 'http://localhost:9000'
-                SONAR_AUTH_TOKEN = credentials('sonarqubepass')
-            }
-            steps {
-                script {
-                    def services = [
-                        [dir: 'vehicle.ms', key: 'vehicle-ms'],
-                        [dir: 'config-server.ms', key: 'config-server-ms'],
-                        [dir: 'eureka-server', key: 'eureka-server-ms'],
-                        [dir: 'gateway-server', key: 'gateway-server-ms'],
-                        [dir: 'repairs-list.ms', key: 'repairs-list-ms'],
-                        [dir: 'repairs-vehicle.ms', key: 'repairs-vehicle-ms'],
-                        [dir: 'reports-uh.ms', key: 'reports_uh-ms']
-                    ]
-
-                    for (service in services) {
-                        dir(service.dir) {/*Agregar verify entre clean y sonar ocn e fin de ejcutar los tests*/
-                            bat "mvn clean sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
-                        }
-                    }
-                }
             }
         }
     }

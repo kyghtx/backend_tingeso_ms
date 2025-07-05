@@ -113,6 +113,15 @@ pipeline {
         
     }
 }
+    stage("Sonarqube Analysis"){
+        environment{
+            SONAR_HOST_URL = 'http://localhost:9000'
+            SONAR_AUTH_TOKEN = credentials('sonarqube')
+        }
+        steps{
+            'bat sonar:sonar -Dsonar.projectKey=sample_project -Dsonar.host.url=$SONAR_HOST_URL -Ds'
+        }
+    }
 
     }
 }

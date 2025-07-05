@@ -113,10 +113,12 @@ pipeline {
         
     }
 }
-    stage("SonarQube Analysis") {
+    }
+
+stage("SonarQube Analysis") {
     environment {
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_AUTH_TOKEN = credentials('sonarqube')
+        SONAR_AUTH_TOKEN = credentials('sonarqubepass') // token correcto
     }
     steps {
         script {
@@ -132,13 +134,10 @@ pipeline {
 
             for (service in services) {
                 dir(service.dir) {
-                    bat "mvn clean verify sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_AUTH_TOKEN%"
+                    bat "mvn clean verify sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                 }
             }
         }
     }
 }
-
-
-    }
 }

@@ -131,8 +131,8 @@ pipeline {
                     ]
 
                     for (service in services) {
-                        dir(service.dir) {
-                            bat "mvn clean verify sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
+                        dir(service.dir) {/*Agregar verify entre clean y sonar ocn e fin de ejcutar los tests*/
+                            bat "mvn clean sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                         }
                     }
                 }

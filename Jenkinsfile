@@ -113,16 +113,32 @@ pipeline {
         
     }
 }
-    stage("Sonarqube Analysis"){
-        environment{
-            SONAR_HOST_URL = 'http://localhost:9000'
-            SONAR_AUTH_TOKEN = credentials('sonarqube')
-        }
-        steps{
-            bat 'mvn sonar:sonar -Dsonar.projectKey=sample_project -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_AUTH_TOKEN%'
+    stage("SonarQube Analysis") {
+    environment {
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_AUTH_TOKEN = credentials('sonarqube')
+    }
+    steps {
+        script {
+            def services = [
+                [dir: 'vehicle.ms', key: 'vehicle-ms'],
+                [dir: 'config-server.ms', key: 'config-server-ms'],
+                [dir: 'eureka-server', key: 'eureka-server-ms'],
+                [dir: 'gateway-server', key: 'gateway-server-ms'],
+                [dir: 'repairs-list.ms', key: 'repairs-list-ms'],
+                [dir: 'repairs-vehicle.ms', key: 'repairs-vehicle-ms'],
+                [dir: 'reports-uh.ms', key: 'reports_uh-ms']
+            ]
 
+            for (service in services) {
+                dir(service.dir) {
+                    bat "mvn clean verify sonar:sonar -DskipTests=false -Dsonar.projectKey=${service.key} -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_AUTH_TOKEN%"
+                }
+            }
         }
     }
+}
+
 
     }
 }

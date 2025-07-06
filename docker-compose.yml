@@ -1,15 +1,21 @@
 version: '3.8'
 
 services:
+
   jenkins:
-    container_name: jenkins
     image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
     ports:
-      - "8200:8200"
+      - "8081:8080" # Jenkins web UI
+      - "50000:50000" # para agentes
     volumes:
-      - $PWD/jenkins_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock # acceso a Docker
+      - ./jenkins-docker:/home # opcional para scripts/pipelines
     networks:
       - spring-net
+  
   sonarqube:
     container_name: sonarqube
     image : sonarqube:lts
@@ -249,6 +255,7 @@ volumes:
   repairs-list-data:
   repairs-vehicle-data:
   reports-uh-data:
+  jenkins_home:
 
 networks:
   spring-net:

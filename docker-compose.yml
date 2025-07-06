@@ -1,6 +1,27 @@
 version: '3.8'
 
 services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    ports:
+      - "8200:8200"
+    volumes:
+      - $PWD/jenkins_home:/var/jenkins_home
+    networks:
+      - spring-net
+  sonarqube:
+    container_name: sonarqube
+    image : sonarqube:lts
+    ports:
+      - "9001:9001"
+    environment:
+      SONARQUBE_USERNAME: admin
+      SONARQUBE_PASSWORD: admin
+    networks:
+      - spring-net
+    
+
   config-server:
     image: kyghtx/config-server-ms
     build:
@@ -211,7 +232,16 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    ports:
+      - "8099:8099" # Cambia el puerto si deseas acceder a la UI Web
+    networks:
+      - spring-net
+    volumes:
+      - ./zap:/zap/wrk  
+    command: zap.sh -daemon -host 0.0.0.0 -port 8099 -config api.disablekey=true
+    
     
     
 volumes:

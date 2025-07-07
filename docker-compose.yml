@@ -2,32 +2,6 @@ version: '3.8'
 
 services:
 
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    restart: unless-stopped
-    ports:
-      - "8081:8080" # Jenkins web UI
-      - "50000:50000" # para agentes
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock # acceso a Docker
-      - ./jenkins-docker:/home # opcional para scripts/pipelines
-    networks:
-      - spring-net
-  
-  sonarqube:
-    container_name: sonarqube
-    image : sonarqube:lts
-    ports:
-      - "9001:9001"
-    environment:
-      SONARQUBE_USERNAME: admin
-      SONARQUBE_PASSWORD: admin
-    networks:
-      - spring-net
-    
-
   config-server:
     image: kyghtx/config-server-ms
     build:

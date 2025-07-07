@@ -15,7 +15,7 @@ pipeline {
                 poll: false
             }
         }
-
+       
         stage('Build frontend') {
             steps {
                 dir('frontend-tingeso-ms') {
@@ -25,10 +25,9 @@ pipeline {
                 }
             }
         }
-
         stage("SonarQube Analysis") {
             environment {
-                SONAR_HOST_URL = 'http://localhost:9000'
+                SONAR_HOST_URL = 'http://sonarqube:9000'
                 SONAR_AUTH_TOKEN = credentials('sonarqubepass')
             }
             steps {
@@ -98,6 +97,9 @@ pipeline {
                 }
             }
         }
+            
+        stage('Owasp ZAP')
+
 
         stage('Deploy with Docker Compose') {
             steps {
@@ -106,5 +108,6 @@ pipeline {
                 bat 'docker-compose up -d --build --remove-orphans'
             }
         }
+
     }
 }

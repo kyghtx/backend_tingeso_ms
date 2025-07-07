@@ -212,35 +212,37 @@ services:
         condition: service_healthy
       config-server:
         condition: service_healthy
-  postgres:
-    image: postgres:13
-    container_name: sonarqube_db
-    environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
-      POSTGRES_DB: sonarqube
-    volumes:
-      - sonar_db_data:/var/lib/postgresql/data
-    networks:
-      - spring-net
 
-  sonarqube:
-    image: sonarqube:community
-    container_name: sonarqube
-    depends_on:
-      - postgres
-    environment:
-      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonarqube
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
-    ports:
-      - "9000:9000"
-    volumes:
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_logs:/opt/sonarqube/logs
-    networks:
-      - spring-net
+
+ # postgres:
+ #   image: postgres:13
+ #   container_name: sonarqube_db
+ #   environment:
+ #     POSTGRES_USER: sonar
+ #     POSTGRES_PASSWORD: sonar
+ #     POSTGRES_DB: sonarqube
+ #   volumes:
+ #     - sonar_db_data:/var/lib/postgresql/data
+ #   networks:
+ #     - spring-net
+
+ # sonarqube:
+  #  image: sonarqube:community
+   # container_name: sonarqube
+   # depends_on:
+   #   - postgres
+   # environment:
+   #   SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonarqube
+   ##   SONAR_JDBC_USERNAME: sonar
+   #   SONAR_JDBC_PASSWORD: sonar
+   # ports:
+   #   - "9000:9000"
+   # volumes:
+   #   - sonarqube_data:/opt/sonarqube/data
+    #  - sonarqube_extensions:/opt/sonarqube/extensions
+     # - sonarqube_logs:/opt/sonarqube/logs
+   # networks:
+   #   - spring-net
 
   zap:
     image: ghcr.io/zaproxy/zaproxy:stable
@@ -252,14 +254,6 @@ services:
       - ./zap:/zap/wrk  
     command: zap.sh -daemon -host 0.0.0.0 -port 8099 -config api.disablekey=true
 
-  ngrok:
-    image: ngrok/ngrok:latest
-    command: http app:8081  # Reenvía el puerto 8081 del servicio jenkins alojado en localhost
-    environment:
-      NGROK_AUTHTOKEN: 2zWI1MRqCqXZIAyouer1PDbu5bp_7WEYWBR1kAuSfvftgi9U7
-    
-    
-    
 volumes:
   vehicle-data:
   repairs-list-data:

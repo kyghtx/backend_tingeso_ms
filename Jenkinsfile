@@ -78,10 +78,21 @@ pipeline {
                 bat 'docker-compose up -d --build --remove-orphans'
             }
         }
+        stage('Iniciar SonarQube') {
+             steps {
+                 bat 'start "" "C:\Users\nicol\Desktop\sonarqube-25.6.0.109173\bin\windows-x86-64\StartSonar.bat"'
+                 bat '''
+            :loop
+            powershell -Command "try { $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 3; if ($response.StatusCode -eq 200) { exit 0 } } catch { Start-Sleep -Seconds 5; exit 1 }"
+            if %errorlevel% neq 0 goto loop
+        '''
+                 
+            }
+}
 
          stage("SonarQube Analysis") {
             environment {
-                SONAR_HOST_URL = 'http://localhost:9000' /*Puerto donde corrre el contenedor de docker de sonar*/ 
+                SONAR_HOST_URL = 'http://localhost:9000' /*Puerto donde corrre el contenedor de docker de sonar, o el local*/ 
                 SONAR_AUTH_TOKEN = credentials('sonarqubepass')
             }
             steps {

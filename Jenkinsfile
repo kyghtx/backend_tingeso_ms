@@ -98,7 +98,6 @@ pipeline {
             }
         }
             
-        stage('Owasp ZAP')
 
 
         stage('Deploy with Docker Compose') {

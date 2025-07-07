@@ -49,14 +49,6 @@ pipeline {
             }
         }
 
-        stage('Build frontend Docker Image') {
-            steps {
-                dir('frontend-tingeso-ms') {
-                    bat 'docker build -t kyghtx/frontend-app .'
-                }
-            }
-        }
-
         stage('Push Docker Images') {
             steps {
                 withCredentials([string(credentialsId: 'dckhubpassword', variable: 'dockerpass')]) {
@@ -82,6 +74,7 @@ pipeline {
                 bat 'docker-compose up -d --build --remove-orphans'
             }
         }
+
             stage("SonarQube Analysis") {
             environment {
                 SONAR_HOST_URL = 'http://sonarqube:9000'

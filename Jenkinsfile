@@ -82,31 +82,33 @@ pipeline {
 
         stage('Iniciar SonarQube') {
             steps {
+                // Iniciar SonarQube
                 bat 'start "" "C:\\Users\\nicol\\Desktop\\sonarqube-25.6.0.109173\\bin\\windows-x86-64\\StartSonar.bat"'
 
+                // Crear un script PowerShell temporal para esperar a que esté disponible
                 bat '''
-                    echo Esperando a que SonarQube levante...
-                    powershell -Command "& {
-                        $maxRetries = 30
-                        $retryCount = 0
-                        while ($true) {
-                            try {
-                                $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 5
-                                if ($response.StatusCode -eq 200) {
-                                    Write-Host 'SonarQube está listo.'
-                                    break
-                                }
-                            } catch {
-                                Write-Host 'Esperando...'
-                            }
-                            Start-Sleep -Seconds 5
-                            $retryCount++
-                            if ($retryCount -ge $maxRetries) {
-                                Write-Host 'Tiempo de espera agotado.'
-                                exit 1
-                            }
-                        }
-                    }"
+                    echo $maxRetries = 30 > wait_sonar.ps1
+                    echo $retryCount = 0 >> wait_sonar.ps1
+                    echo while ($true) { >> wait_sonar.ps1
+                    echo ^    try { >> wait_sonar.ps1
+                    echo ^        $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 5 >> wait_sonar.ps1
+                    echo ^        if ($response.StatusCode -eq 200) { >> wait_sonar.ps1
+                    echo ^            Write-Host "SonarQube esta listo." >> wait_sonar.ps1
+                    echo ^            break >> wait_sonar.ps1
+                    echo ^        } >> wait_sonar.ps1
+                    echo ^    } catch { >> wait_sonar.ps1
+                    echo ^        Write-Host "Esperando..." >> wait_sonar.ps1
+                    echo ^    } >> wait_sonar.ps1
+                    echo ^    Start-Sleep -Seconds 5 >> wait_sonar.ps1
+                    echo ^    $retryCount++ >> wait_sonar.ps1
+                    echo ^    if ($retryCount -ge $maxRetries) { >> wait_sonar.ps1
+                    echo ^        Write-Host "Tiempo de espera agotado." >> wait_sonar.ps1
+                    echo ^        exit 1 >> wait_sonar.ps1
+                    echo ^    } >> wait_sonar.ps1
+                    echo } >> wait_sonar.ps1
+
+                    powershell -ExecutionPolicy Bypass -File wait_sonar.ps1
+                    del wait_sonar.ps1
                 '''
             }
         }

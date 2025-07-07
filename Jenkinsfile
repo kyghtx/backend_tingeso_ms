@@ -5,7 +5,13 @@ pipeline {
         maven "maven"
     }
 
+    environment {
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_AUTH_TOKEN = credentials('sonarqubepass')
+    }
+
     stages {
+
         stage('Checkout') {
             steps {
                 cleanWs()
@@ -82,42 +88,35 @@ pipeline {
 
         stage('Iniciar SonarQube') {
             steps {
-                // Iniciar SonarQube
                 bat 'start "" "C:\\Users\\nicol\\Desktop\\sonarqube-25.6.0.109173\\bin\\windows-x86-64\\StartSonar.bat"'
-
-                // Crear un script PowerShell temporal para esperar a que esté disponible
                 bat '''
-                    echo $maxRetries = 30 > wait_sonar.ps1
-                    echo $retryCount = 0 >> wait_sonar.ps1
-                    echo while ($true) { >> wait_sonar.ps1
-                    echo ^    try { >> wait_sonar.ps1
-                    echo ^        $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 5 >> wait_sonar.ps1
-                    echo ^        if ($response.StatusCode -eq 200) { >> wait_sonar.ps1
-                    echo ^            Write-Host "SonarQube esta listo." >> wait_sonar.ps1
-                    echo ^            break >> wait_sonar.ps1
-                    echo ^        } >> wait_sonar.ps1
-                    echo ^    } catch { >> wait_sonar.ps1
-                    echo ^        Write-Host "Esperando..." >> wait_sonar.ps1
-                    echo ^    } >> wait_sonar.ps1
-                    echo ^    Start-Sleep -Seconds 5 >> wait_sonar.ps1
-                    echo ^    $retryCount++ >> wait_sonar.ps1
-                    echo ^    if ($retryCount -ge $maxRetries) { >> wait_sonar.ps1
-                    echo ^        Write-Host "Tiempo de espera agotado." >> wait_sonar.ps1
-                    echo ^        exit 1 >> wait_sonar.ps1
-                    echo ^    } >> wait_sonar.ps1
-                    echo } >> wait_sonar.ps1
-
-                    powershell -ExecutionPolicy Bypass -File wait_sonar.ps1
-                    del wait_sonar.ps1
+                    echo Esperando a que SonarQube esté disponible...
+                    powershell -Command "& {
+                        $maxRetries = 30
+                        $retryCount = 0
+                        while ($true) {
+                            try {
+                                $res = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 5
+                                if ($res.StatusCode -eq 200) {
+                                    Write-Host 'SonarQube está listo.'
+                                    break
+                                }
+                            } catch {
+                                Write-Host 'Esperando...'
+                            }
+                            Start-Sleep -Seconds 5
+                            $retryCount++
+                            if ($retryCount -ge $maxRetries) {
+                                Write-Host 'Tiempo de espera agotado.'
+                                exit 1
+                            }
+                        }
+                    }"
                 '''
             }
         }
 
         stage("SonarQube Analysis") {
-            environment {
-                SONAR_HOST_URL = 'http://localhost:9000'
-                SONAR_AUTH_TOKEN = credentials('sonarqubepass')
-            }
             steps {
                 script {
                     def services = [
@@ -138,5 +137,47 @@ pipeline {
                 }
             }
         }
+
+        stage('ZAP Scan') {
+            steps {
+                bat '''
+                    echo Esperando que ZAP esté disponible...
+                    powershell -Command "& {
+                        $maxRetries = 30
+                        $retryCount = 0
+                        while ($true) {
+                            try {
+                                $res = Invoke-WebRequest -Uri http://localhost:8099 -UseBasicParsing -TimeoutSec 3
+                                if ($res.StatusCode -eq 200) { break }
+                            } catch {}
+                            Start-Sleep -Seconds 5
+                            $retryCount++
+                            if ($retryCount -ge $maxRetries) { exit 1 }
+                        }
+                    }"
+
+                    echo Iniciando escaneo ZAP...
+                    curl "http://localhost:8099/JSON/ascan/action/scan/?url=http://localhost:8080&recurse=true&inScopeOnly=false"
+
+                    echo Esperando resultados del escaneo...
+                    powershell -Command "& {
+                        do {
+                            $status = (Invoke-RestMethod http://localhost:8099/JSON/ascan/view/status/).status
+                            Write-Host ('Progreso: ' + $status + '%%')
+                            Start-Sleep -Seconds 5
+                        } while ($status -ne '100')
+                    }"
+
+                    echo Exportando reporte JSON...
+                    curl "http://localhost:8099/OTHER/core/other/jsonreport/" -o zap-report.json
+
+                    echo Exportando reporte HTML...
+                    curl "http://localhost:8099/OTHER/core/other/htmlreport/" -o zap-report.html
+                '''
+                archiveArtifacts artifacts: 'zap-report.*', fingerprint: true
+            }
+        }
+
+        
     }
 }

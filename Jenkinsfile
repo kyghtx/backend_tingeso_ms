@@ -15,6 +15,7 @@ pipeline {
                     poll: false
             }
         }
+
         stage('Build frontend') {
             steps {
                 dir('frontend-tingeso-ms') {
@@ -78,21 +79,41 @@ pipeline {
                 bat 'docker-compose up -d --build --remove-orphans'
             }
         }
-        stage('Iniciar SonarQube') {
-             steps {
-                 bat 'start "" "C:\Users\nicol\Desktop\sonarqube-25.6.0.109173\bin\windows-x86-64\StartSonar.bat"'
-                 bat '''
-            :loop
-            powershell -Command "try { $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 3; if ($response.StatusCode -eq 200) { exit 0 } } catch { Start-Sleep -Seconds 5; exit 1 }"
-            if %errorlevel% neq 0 goto loop
-        '''
-                 
-            }
-}
 
-         stage("SonarQube Analysis") {
+        stage('Iniciar SonarQube') {
+            steps {
+                bat 'start "" "C:\\Users\\nicol\\Desktop\\sonarqube-25.6.0.109173\\bin\\windows-x86-64\\StartSonar.bat"'
+
+                bat '''
+                    echo Esperando a que SonarQube levante...
+                    powershell -Command "& {
+                        $maxRetries = 30
+                        $retryCount = 0
+                        while ($true) {
+                            try {
+                                $response = Invoke-WebRequest -Uri http://localhost:9000 -UseBasicParsing -TimeoutSec 5
+                                if ($response.StatusCode -eq 200) {
+                                    Write-Host 'SonarQube está listo.'
+                                    break
+                                }
+                            } catch {
+                                Write-Host 'Esperando...'
+                            }
+                            Start-Sleep -Seconds 5
+                            $retryCount++
+                            if ($retryCount -ge $maxRetries) {
+                                Write-Host 'Tiempo de espera agotado.'
+                                exit 1
+                            }
+                        }
+                    }"
+                '''
+            }
+        }
+
+        stage("SonarQube Analysis") {
             environment {
-                SONAR_HOST_URL = 'http://localhost:9000' /*Puerto donde corrre el contenedor de docker de sonar, o el local*/ 
+                SONAR_HOST_URL = 'http://localhost:9000'
                 SONAR_AUTH_TOKEN = credentials('sonarqubepass')
             }
             steps {
@@ -106,6 +127,7 @@ pipeline {
                         [dir: 'repairs-vehicle.ms', key: 'repairs-vehicle-ms'],
                         [dir: 'reports-uh.ms', key: 'reports_uh-ms']
                     ]
+
                     for (service in services) {
                         dir(service.dir) {
                             bat "mvn sonar:sonar -Dsonar.projectKey=${service.key} -Dsonar.java.binaries=target/classes -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"

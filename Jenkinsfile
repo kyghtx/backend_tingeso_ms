@@ -25,6 +25,7 @@ pipeline {
                 }
             }
         }
+        
     
 
         stage("Build Docker Images") {
@@ -42,6 +43,7 @@ pipeline {
 
                     for (service in services) {
                         dir(service.dir) {
+                            bat "mvn clean install -DskipTests"
                             bat "docker build -t ${service.image} ."
                         }
                     }
@@ -74,8 +76,7 @@ pipeline {
                 bat 'docker-compose up -d --build --remove-orphans'
             }
         }
-
-            stage("SonarQube Analysis") {
+        stage("SonarQube Analysis") {
             environment {
                 SONAR_HOST_URL = 'http://sonarqube:9000'
                 SONAR_AUTH_TOKEN = credentials('sonarqubepass')
@@ -94,13 +95,14 @@ pipeline {
 
                     for (service in services) {
                         dir(service.dir) {
-                            bat "mvn clean install -DskipTests"
                             bat "mvn sonar:sonar -Dsonar.projectKey=${service.key} -Dsonar.java.binaries=target/classes -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                         }
                     }
                 }
             }
         }
+
+        
 
     }
 }

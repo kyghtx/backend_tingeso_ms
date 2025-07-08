@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        SONAR_HOST_URL = 'http://localhost:9001'
+        SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_AUTH_TOKEN = credentials('sonarqubepass')
     }
 

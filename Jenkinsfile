@@ -108,13 +108,12 @@ pipeline {
             }
         }
 
-        stage('Run OWASP ZAP Scan') {
-            steps {
-                bat 'docker exec zap zap-baseline.py -t http://gateway:8080 -r zap_report.html || exit /b 0'
-                bat 'docker cp zap:/zap/wrk/zap_report.html zap_report.html'
-                archiveArtifacts artifacts: 'zap_report.html', allowEmptyArchive: true
-            }
-        }
+        stage('OWASP ZAP Scan') {
+    steps {
+        echo "Ejecutando análisis ZAP en http://localhost:8080"
+        bat '"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat" -cmd -quickurl http://localhost:8080 -quickout zap-report.html'
+    }
+}
 
     }
 }

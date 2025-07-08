@@ -111,9 +111,21 @@ pipeline {
         stage('OWASP ZAP Scan') {
     steps {
         echo "Ejecutando análisis ZAP en http://localhost:8080"
-        bat '"C:\Program Files\ZAP\Zed Attack Proxy\zap.bat" -cmd -quickurl http://localhost:8080 -quickout zap-report.html'
-    }
+        bat bat "\"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat\" -cmd -quickurl http://localhost:8080 -quickout zap-report.html"
+
 }
+    stage('Dependency Check') {
+            steps {
+                bat '''
+                     set JAVA_OPTS=-Xmx4G
+                        dependency-check.bat --project "backend_tingeso_ms" ^
+                      --scan . ^
+                      --format HTML ^
+                      --out dependency-check-report
+'''
+
+            }
+        }
 
     }
 }

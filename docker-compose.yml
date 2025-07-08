@@ -246,14 +246,20 @@ services:
 
   zap:
     image: ghcr.io/zaproxy/zaproxy:stable
+    container_name: zap
     ports:
-      - "8099:8099" # Cambia el puerto si deseas acceder a la UI Web
+      - "8099:8099"     # API REST de ZAP (Jenkins lo usa)
+      - "8098:8080"     # Interfaz gráfica web de ZAP (no puede usar 8080:8080 por el gateway)
     networks:
       - spring-net
     volumes:
-      - ./zap:/zap/wrk  
-    command: zap.sh -daemon -host 0.0.0.0 -port 8099 -config api.disablekey=true -config api.addrs.addr.name=.*
-
+      - ./zap:/zap/wrk
+    command: >
+      zap.sh -daemon -host 0.0.0.0 -port 8099
+           -config api.disablekey=true
+           -config api.addrs.addr.name=.*
+           -config view.mode=gui
+           -config jxbrowser.port=8080
     
 
 volumes:

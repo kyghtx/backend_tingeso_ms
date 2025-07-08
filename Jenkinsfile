@@ -108,6 +108,13 @@ pipeline {
             }
         }
 
-        
+        stage('Run OWASP ZAP Scan') {
+            steps {
+                bat 'docker exec zap zap-baseline.py -t http://gateway:8080 -r zap_report.html || exit /b 0'
+                bat 'docker cp zap:/zap/wrk/zap_report.html zap_report.html'
+                archiveArtifacts artifacts: 'zap_report.html', allowEmptyArchive: true
+            }
+        }
+
     }
 }

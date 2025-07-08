@@ -86,48 +86,6 @@ pipeline {
             }
         }
 
-     stage('Iniciar SonarQube') {
-    steps {
-        echo 'Iniciando SonarQube...'
-        // Iniciar SonarQube en un proceso separado para que no bloquee el paso de Jenkins.
-        // El 'start ""' es crucial aquí para que el script batch se ejecute en segundo plano
-        // y el paso de Jenkins pueda continuar.
-        bat 'start "" "C:\\Users\\nicol\\Desktop\\sonarqube-25.6.0.109173\\bin\\windows-x86-64\\StartSonar.bat"'
-
-        echo 'Esperando que SonarQube esté listo y accesible en http://localhost:9000...'
-        // Este bloque de PowerShell espera hasta que SonarQube responda.
-        // Es la parte más importante para asegurar que la siguiente etapa no falle.
-        powershell '''
-            $maxRetries = 30 # Número máximo de intentos
-            $retryCount = 0
-            $sonarQubeUrl = "http://localhost:9000"
-            $sleepSeconds = 10 # Tiempo de espera entre intentos
-
-            while ($true) {
-                try {
-                    $res = Invoke-WebRequest -Uri $sonarQubeUrl -UseBasicParsing -TimeoutSec 10 # Tiempo máximo para la solicitud
-                    if ($res.StatusCode -eq 200) {
-                        Write-Host "SonarQube está listo y accesible."
-                        break # Salir del bucle si SonarQube responde
-                    }
-                } catch {
-                    Write-Host "SonarQube aún no está listo. Reintentando... (Intento $($retryCount + 1)/$maxRetries)"
-                }
-
-                Start-Sleep -Seconds $sleepSeconds # Esperar antes del próximo intento
-                $retryCount++
-
-                if ($retryCount -ge $maxRetries) {
-                    Write-Host "Tiempo de espera agotado. SonarQube no se inició a tiempo. Fallando el pipeline."
-                    exit 1 # Terminar el script de PowerShell con un error, lo que fallará el paso de Jenkins
-                }
-            }
-        '''
-        echo 'SonarQube ha sido iniciado y está completamente listo para usar.'
-    }
-}
-
-
         stage("SonarQube Analysis") {
             steps {
                 script {

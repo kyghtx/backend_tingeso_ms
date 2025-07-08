@@ -111,7 +111,7 @@ pipeline {
         stage('OWASP ZAP Scan') {
     steps {
         echo "Ejecutando análisis ZAP en http://localhost:8080"
-        bat '"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat" -cmd -quickurl http://localhost:8080 -quickout zap-report.html'
+        bat '"C:\Program Files\ZAP\Zed Attack Proxy\zap.bat" -cmd -quickurl http://localhost:8080 -quickout zap-report.html'
     }
 }
 
